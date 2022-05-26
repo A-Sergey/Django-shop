@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+{% block login %}
+	{% if not user.is_authenticated %}
+		<a href="{% url 'login' %}">Войти</a>
+	{% else %}
+		<a href="#">Выйти</a>
+	{% endif %}
+{% endblock %}

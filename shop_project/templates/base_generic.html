@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Local Library</title>{% endblock %}
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+</head>
+<body>
+	<div id="header">
+		<header>
+			<a href="/"><img src="{% static '/images/seller.png' %}" alt="Магазин" title="Магазин" /></a>
+			<div class="xxx">
+				{% block login %}{% endblock login %}
+				<a href="/basket/">Basket</a>
+			</div>
+		</header>
+		<nav>
+			<ul class="top-menu">
+				{% for key, value in names_menu.items %}
+					{% if key == request.path %}
+						<li class="active">{{value}}</li>
+					{% else %}
+						<li><a href="{{key}}">{{value}}</a></li>
+					{% endif %}
+				{% endfor %}
+		</nav>
+		<aside>
+		<nav>
+			<ul class="aside-menu">
+				<li class="active">LOREM</li>
+				<li><a href="/donec/">DONEC</a></li>
+				<li><a href="/vestibulum">VESTI</a></li>
+			</ul>
+		</nav>
+		<h2>OUR OFFICES</h2>
+		<p><img src="/static/images/sample.png" width="100%" height="100%" alt="Our offices"></p>
+		</aside>
+		{% for key, value in names_menu.items %}
+		{% if key == request.path %}
+		<h1 class="head">{{value|upper}}</h1>
+		{% endif %}
+	{% endfor %}
+		
+		{% block body %}{% endblock %}
+	</div>
+</body>
+</html>
+

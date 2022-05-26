@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+ 
+{% block body %}
+<h2 style="margin-block: 3em;text-align: center;">Sign up</h2>
+<form class="reg" method="post">
+  {% csrf_token %}
+  {{ reg.as_p }}
+  <button type="submit">Sign up</button>
+</form>
+{% endblock body %}

@@ -1,0 +1,178 @@
+#wrapper {
+	max-width: 960px;
+	margin: auto;
+}
+
+.log {
+	float: right;
+}
+
+nav ul.top-menu {
+	margin-left: auto;
+    margin-right: auto;
+	width: 51%;
+}
+nav li {
+	list-style-position: inside;
+	font: 14px Oswald, sans-serif;
+	padding: 4%;
+}
+.top-menu li {
+	display: inline-block;
+	padding: 10px 90px;
+	margin: 0;
+}
+.top-menu li.active {
+	background: #29c5e6;
+	color: #fff;
+}
+
+.top-menu a {
+	color: #b2b2b2;
+}
+
+.head {
+	text-align: center;
+}
+
+aside {
+	float: left;
+	width: 13%;
+}
+
+section {
+	margin-left: 280px;
+	padding-bottom: 50px;
+}
+
+.aside-menu li {
+    list-style-type: square;
+}
+
+.aside-menu li:first-child {
+	border: none;
+}
+
+.aside-menu i.active {
+	color: #29c5e6;
+}
+
+.aside-menu a {
+	color: #8f8f8f;
+}
+
+aside > h2 {
+	background: #29c5e6;
+	font: 90% 'Oswald', sans-serif;
+	color: #fff;
+	padding: 4%;
+	margin: 7% 0 0 0;
+}
+
+aside > p {
+	background: #f3f3f3;
+	border: 1px solid #e7e7e7;
+	padding: 10px;
+	margin: 0;
+}
+
+.xxx {
+    float: right;
+    padding-right: 1%;
+    padding-top: 1%;
+}
+
+.reg {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.publish {
+    background: #29c5e6;
+    border: 1px solid;
+    width: 50%;
+    margin-left: 32%;
+    line-height: 2em;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+.post {
+    background: #E0FFFF;
+    width: 50%;
+    margin-left: 32%;
+    text-align: center;
+}
+
+.post > p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+}
+.pagination {
+    margin-left: 32%;
+    text-align: center;
+    display: block;
+    width: 50%;
+}
+
+.page {
+    width: 85%;
+    padding-left: 15%;
+}
+
+.product {
+    position: relative;
+}
+
+.product-image {
+    position: absolute;
+}
+.product-info {
+    position: relative;
+    left: 26%;
+    width: 47%;
+}
+
+.product-info > p{
+    background: #E0FFFF;
+    height: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    margin: 0;
+}
+
+p.description{
+    background: #F1FDF7;
+    padding-bottom: 22%;
+}
+
+.user{
+    background: #CADDD3;
+    border-style: inset;
+    border-color: #cacd58;
+    width: 36%;
+    border-radius: 51%;
+    text-align: center;
+}
+
+.comment{
+    background: #CADDD3;
+    border-style: inset;
+    border-color: #cacd58;
+    width: 73%;
+    border-radius: 1%;
+}
+
+.line {
+    margin-top: 1%;
+    border: none;
+    box-shadow: 0 0 3px 1px black;
+}
+
+.add-comment > h2{
+    margin: 1%;
+
+}
