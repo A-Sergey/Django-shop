@@ -5,9 +5,9 @@ class Product(models.Model):
 
     name = models.CharField(max_length=20,)
     price = models.CharField(max_length=10,)
-    sell = models.CharField(max_length=10, default='')
+    sell = models.CharField(max_length=10, default='',blank = True)
     description = models.CharField(max_length=300,)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', default='images/111.jpg')
 
     def get_absolute_url(self):
         return reverse('product',

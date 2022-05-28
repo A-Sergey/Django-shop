@@ -7,11 +7,15 @@
 	float: right;
 }
 
-nav ul.top-menu {
+/* nav ul.top-menu {
 	margin-left: auto;
     margin-right: auto;
 	width: 51%;
+} */
+.top-menu {
+    margin-inline: 23%;
 }
+
 nav li {
 	list-style-position: inside;
 	font: 14px Oswald, sans-serif;
@@ -19,7 +23,7 @@ nav li {
 }
 .top-menu li {
 	display: inline-block;
-	padding: 10px 90px;
+	padding: 10px 13%;
 	margin: 0;
 }
 .top-menu li.active {
@@ -146,7 +150,7 @@ aside > p {
 
 p.description{
     background: #F1FDF7;
-    padding-bottom: 22%;
+    padding-bottom: 26%;
 }
 
 .user{
@@ -172,7 +176,34 @@ p.description{
     box-shadow: 0 0 3px 1px black;
 }
 
-.add-comment > h2{
+.comments .pagination{
     margin: 1%;
+    width: 71%;
+}
 
+.add-comment > h2{
+    width: 73%;
+}
+
+.add-comment form > textarea{
+    width: 55%;
+}
+
+div.name {
+    width: 16%;
+    margin-left: 25%;
+}
+
+.name > p{
+    background: #29c5e6;
+    color: #fff;
+    margin: 0;
+    margin-left: 33%;
+    margin-right: 50%;
+    width: 95%;
+    padding: 10px 13%;
+    text-align: center;
+    display: inline-block;
+    font: 14px Oswald, sans-serif;
+    list-style-position: inside;
 }

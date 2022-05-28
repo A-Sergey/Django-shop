@@ -57,7 +57,7 @@
         {% else %}
             <p>{{ product.price }} руб</p>
         {% endif %}
-		<img src="{{ product.image.url}}" style="width: 25%;"/>
+		<img src="{{ product.image.url}}" style="width: 10%;"/>
 		<form action="{% url 'basket_add' product.id %} method="post">
 			{{ basket_product_form }}
 			{% csrf_token %}

@@ -50,11 +50,11 @@
 {% block body %}
 <div class="page">
     <div class="product">
+        <div class="name"><p>{{ product.name }}</p></div>
         <div class="product-image">
             <img src="{{ product.image.url }}" style="width: 25%;"/>
         </div>
         <div class="product-info">
-            <p class="name">{{ product.name }}</p>
             {% if product.sell %}
                 <p class="price">
                     <s>{{ product.price }} руб</s>
@@ -68,15 +68,19 @@
         </div>
     </div>
     <div class="comments">
-        {% with comments.count as total_comments %}
+        {% with comments as total_comments %}
             <h2>
-                Total of {{ total_comments }} comment{{ total_comments|pluralize }}
+                Total of {{ total_comments.paginator.count }} comment{{ total_comments|pluralize }}
             </h2>
         {% endwith %}
         {% for comment in comments %}
             {% if comment.active %}
                 <div class="user">
-                    <p>Comment {{forloop.counter}} by {{comment.author}}</p>
+                    {% for key,value in dict_count.items %}
+                        {% if key == comment.id %}
+                            <p>Comment {{ value }} by {{comment.author}} </p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="comment">
                     <div class="date">
@@ -94,20 +98,17 @@
             {% empty %}
             <div class="comment"><p>No comments.</p></div>
         {% endfor %}
+    {% include "pagination.html" with page=comments %}        
     </div>
 
     <div class="add-comment">
         {% if user.is_authenticated %}
-            {% if new_comment %}
-                <h2>Your comment has been added.</h2>
-            {% else %}
-                <h2>Add a new comment</h2>
-                <form action="." method="post">
-                    {{comment_form.as_p}}
-                    {% csrf_token %}
-                    <p><input type="submit" value="Add comment"></p>
-                </form>
-            {% endif %}
+            <h2>Add a new comment</h2>
+            <form action="." method="post">
+                {{comment_form.body}}
+                {% csrf_token %}
+                <p><input type="submit" value="Add comment"></p>
+            </form>
         {% endif %}
     </div>
 </div>

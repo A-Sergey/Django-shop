@@ -1,25 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
-#from shop.views import get_AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.contrib.auth.forms import AuthenticationForm
-
-# def post_list(request):
-    # posts_list = Post.objects.all()
-    # paginator = Paginator(posts_list,3,orphans=1)
-    # page = request.GET.get('page')
-    # #page_range = paginator.get_elided_page_range(number=page)
-    # try:
-        # posts = paginator.page(page)
-        
-    # except PageNotAnInteger:
-        # posts= paginator.page(1)
-    # except EmptyPage:
-        # posts = paginator.page(paginator.num_pages)
-    # return render(request, 'news.html',{'posts':posts,
-                                        # 'page':page,
-                                         # 'form':get_AuthenticationForm(),})
 
 class PostListView(ListView):
     queryset = Post.objects.all()
@@ -27,10 +10,7 @@ class PostListView(ListView):
     paginate_by = 3
     paginate_orphans = 1
     template_name = 'news.html'
-    
-    #def get_template_names(self):
-    #    return('news.html')
-        
+
     def get(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()
         allow_empty = self.get_allow_empty()
