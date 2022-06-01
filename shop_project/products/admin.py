@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Product,Comment
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price','sell', 'image')
+    list_display = ('name', 'price','sell', 'image','product_of_the_day')
     search_fields = ('name','price',)
     
 class CommentAdmin(admin.ModelAdmin):

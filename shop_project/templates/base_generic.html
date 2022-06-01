@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Local Library</title>{% endblock %}
+  <title>{% block title %}{% endblock %}</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
 </head>
@@ -26,16 +26,30 @@
 				{% endfor %}
 		</nav>
 		<aside>
-		<nav>
-			<ul class="aside-menu">
-				<li class="active">LOREM</li>
-				<li><a href="/donec/">DONEC</a></li>
-				<li><a href="/vestibulum">VESTI</a></li>
-			</ul>
-		</nav>
-		<h2>OUR OFFICES</h2>
-		<p><img src="/static/images/sample.png" width="100%" height="100%" alt="Our offices"></p>
-		</aside>
+            <nav>
+                <ul class="aside-menu">
+                    {% if products_sale %}
+                    <h1>SALE</h1>
+                    {% for product in products_sale%}
+                        {% if product.product_of_the_day == False %}
+                            {% if "/products/"|add:product.name in request.path %}
+                                <li class="active">{{product.name}} - {{product.get_price}} руб</li>
+                            {% else %}
+                                <li><a href="{% url 'product' product.name %}">{{product.name}} - {{product.get_price}} руб</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </nav>
+            {% if "/products/"|add:product_of_the_day.name in request.path %}
+                <h2>Product of the day = {{product_of_the_day.get_price}} !!!</h2>
+            {% else %}
+                <h2><a href="{% url 'product' product_of_the_day.name %}">Product of the day = {{product_of_the_day.get_price}} !!!</a></h2>            
+            {% endif %}
+            <p><img src="{{product_of_the_day.image.url}}" width="100%" height="100%"></p>
+            {#<p><img src="/static/images/sample.png" width="100%" height="100%"></p>#}
+        </aside>
 		{% for key, value in names_menu.items %}
 		{% if key == request.path %}
 		<h1 class="head">{{value|upper}}</h1>

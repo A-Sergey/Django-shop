@@ -4,7 +4,28 @@
 <h2 style="margin-block: 3em;text-align: center;">Sign up</h2>
 <form class="reg" method="post">
   {% csrf_token %}
-  {{ reg.as_p }}
+
+    <div class='username'>
+    <label for="{{ reg.quantity.id_for_label }}">Username: </label>
+    <p>{{reg.username}}</p>
+    </div>
+    <div class='email'>
+    <label for="{{ reg.quantity.id_for_label }}">Email: </label>
+    <p>{{reg.email}}</p>
+    </div>
+    <div class='birth'>
+    <label for="{{ reg.quantity.id_for_label }}">Date of birth: </label>
+    <p>{{reg.date_of_birth}}</p>
+    </div>
+    <div class='password1'>
+    <label for="{{ reg.quantity.id_for_label }}">Password: </label>
+    <p>{{reg.password1}}</p>
+    </div>
+    <div class='password2'>
+    <label for="{{ reg.quantity.id_for_label }}">Password(confirm): </label>
+    <p>{{reg.password2}}</p>
+
+  {#{ reg.as_p }#}
   <button type="submit">Sign up</button>
 </form>
 {% endblock body %}

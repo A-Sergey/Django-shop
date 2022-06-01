@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
-{% block title %}Products{% endblock title %}
+{% block title %}<title>Basket</title>{% endblock title %}
+
 {% block login %}
 {% if not user.is_authenticated %}
 {% if form.errors %}
@@ -44,35 +45,33 @@
 <a href="{% url 'logout' %}?next={{request.path}}">Выйти</a>
 {% endif %}
 {% endblock login %}
+
 {% block body %}
-{% if list_products %}
-    <ul>
-    {% for product in list_products %}
-        <li><a href="/products/{{ product.name }}/">{{ product.name }}</a></li>
-        {% if product.sell %}
-            <p>
-                <s>{{ product.price }} руб</s>
-                <font color="red" size="5">{{ product.sell }} руб</font>
-            </p>
-        {% else %}
-            <p>{{ product.price }} руб</p>
-        {% endif %}
-		<img src="{{ product.image.url}}" style="width: 10%;"/>
-				<form action="{% url 'basket_add' product.name %}" method="post">
+<div class = "basket-de">
+	{% for product in basket%}
+		<div class="basket-product">
+			<img src="{{ product.product.image.url }}" style="width: 15%;"/>
+			<p>Price: {{product.price}}</p>
+				<form action="{% url 'basket_add' product.product.name %}" method="post">
 					{% csrf_token %}
 					<label for="{{ basket_form.quantity.id_for_label }}">Count: </label>
-                    
-                    {% for key, value in basket.basket.items %}
-                        {% if product.id == key %}
-                            <input id="{{ basket_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{value.quantity}}">
-                        {% endif %}
-                    {% endfor %}
+                    <input id="{{ basket_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{product.quantity}}">
+					{#{{basket_form.quantity}}#}
 					{{basket_form.update}}
 					<input type="submit" value="Add to basket">
 				</form>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No product are available.</p>
-{% endif %}
+			<p>Total price:{{product.total_price}}</p>
+            <span>
+				<form action="{% url 'basket_remove' product.product.name %}">
+					<input type="submit" value="x">
+				</form>
+			</span>
+		</div>
+	{% endfor %}
+	{% if total %}
+		<p>Total: {{total}}</p>
+	{% else %}
+		<p>The basket is empty.</p>
+	{% endif %}
+</div>
 {% endblock %}

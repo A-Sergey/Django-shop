@@ -8,6 +8,12 @@ class Product(models.Model):
     sell = models.CharField(max_length=10, default='',blank = True)
     description = models.CharField(max_length=300,)
     image = models.ImageField(upload_to='images/', default='images/111.jpg')
+    product_of_the_day = models.BooleanField(default=False)
+    
+    def get_price(self):
+        if self.sell:
+            return self.sell
+        return self.price
 
     def get_absolute_url(self):
         return reverse('product',

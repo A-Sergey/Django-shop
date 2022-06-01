@@ -149,3 +149,6 @@ LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 BASKET_SESSION_ID = 'basket'
 DATETIME_FORMAT="j N Y G:i T"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_PORT = '1025'
+EMAIL_HOST = 'localhost'

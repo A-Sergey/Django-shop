@@ -1,5 +1,5 @@
 {% extends "base_generic.html" %}
-{% block title %}<title>Product</title>{% endblock title %}
+{% block title %}Product{% endblock title %}
 {% block login %}
 {% if not user.is_authenticated %}
 {% if form.errors %}
@@ -66,6 +66,16 @@
     
         <p class="description">{{ product.description }}</p>
         </div>
+		<div class="basket">
+			<span>
+				<form action="{% url "basket_add" product.name %}" method="post">
+					{% csrf_token %}
+					{{basket_form.quantity}}
+					{{basket_form.update}}
+					<input type="submit" value="Add to basket">
+				</form>
+			</span>
+		</div>
     </div>
     <div class="comments">
         {% with comments as total_comments %}

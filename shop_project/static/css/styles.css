@@ -90,6 +90,7 @@ aside > p {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
+    position: relative;
 }
 
 .publish {
@@ -207,3 +208,30 @@ div.name {
     font: 14px Oswald, sans-serif;
     list-style-position: inside;
 }
+
+.reg > lable {
+    position: absolute;
+
+}
+/* .reg {
+    position: relative;
+    margin-left: 40%;
+}
+
+.lable {
+    position: absolute;
+}
+
+.forms {
+    margin-left: 0%;
+}
+
+.lable > p {
+    margin-bottom: 20%;
+    margin-top: 10%;
+}
+
+.forms > p {
+    margin-top: 0px;
+    margin-bottom: 10%;
+} */
