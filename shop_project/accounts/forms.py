@@ -3,6 +3,26 @@ from django import forms
 from .models import CustomUser
 from shop import settings
 
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(label='Email')
+    date_of_birth = forms.DateField(label='Date of birth')
+    
+    class Meta:
+        model = CustomUser
+        fields = ("username",'email','date_of_birth')
+        
+    def save(self, commit=True):
+        user = super(RegisterForm, self).save(commit=False)
+        user.email = self.cleaned_data["email"]
+        user.date_of_birth = self.cleaned_data["date_of_birth"]
+        if commit:
+            user.save()
+        return user
+
+class ProfileForm(forms.Form):
+    email = forms.EmailField(label='Email',required=False)
+    date_of_birth = forms.DateField(label='Date of birth',required=False)
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser

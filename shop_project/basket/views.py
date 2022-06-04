@@ -6,6 +6,8 @@ from .forms import BasketAddProductForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Q
+from django.contrib.auth.forms import AuthenticationForm
+
 
 @require_POST
 def basket_add(request, name):
@@ -56,4 +58,5 @@ def basket_detail(request):
                                            'products_sale':products_sale,
                                            'product_of_the_day':product_of_the_day,
                                            'basket_form':basket_form,
-                                           'total':total,})
+                                           'total':total,
+                                           'form':AuthenticationForm(),})

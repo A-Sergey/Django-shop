@@ -5,6 +5,7 @@
   <title>{% block title %}{% endblock %}</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
 	<div id="header">
@@ -12,7 +13,10 @@
 			<a href="/"><img src="{% static '/images/seller.png' %}" alt="Магазин" title="Магазин" /></a>
 			<div class="xxx">
 				{% block login %}{% endblock login %}
-				<a href="/basket/">Basket</a>
+                {% if user.is_authenticated %}
+					<a href="/basket/">Basket</a>
+                    <a href="/accounts/profile/">Profile</a>
+                {% endif %}
 			</div>
 		</header>
 		<nav>

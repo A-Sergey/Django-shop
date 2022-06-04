@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Профиль</title>
-</head>
-<body>
-    <h1>Мой профиль</h1>
+{% extends "base_generic.html" %}
+{% block title %}Profile{% endblock %}
 
-    Имя пользователя: {{ user.username }} <br>
-    Email: {{ user.email }}
-</body>
-</html>
+{% block body %}
+    <h1>Profile</h1>
+    <form action="/accounts/profile/" method="post">
+        {% csrf_token %}
+        <div class='email'>
+            <label for="{{ user_form.email.id_for_label }}">Email: </label>
+            <p>{{user_form.email}}</p>
+        </div>
+        <div class='birth'>
+            <label for="{{ user_form.date_of_birth.id_for_label }}">Date of birth: </label>
+			<p><input id="{{ user_form.date_of_birth.id_for_label }}" type="text" name="date_of_birth" placeholder="{{ user.date_of_birth|date:"d.m.Y" }}"></p>
+        </div>
+        <p><input type="submit" value="Update profile"></p>
+    </form>
+{% endblock %}
