@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from .models import CustomUser
 from shop import settings
+from django.utils.translation import gettext as _
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(label='Email')
@@ -20,8 +21,8 @@ class RegisterForm(UserCreationForm):
         return user
 
 class ProfileForm(forms.Form):
-    email = forms.EmailField(label='Email',required=False)
-    date_of_birth = forms.DateField(label='Date of birth',required=False)
+    email = forms.EmailField(label=_('Email'),required=False)
+    date_of_birth = forms.DateField(label=_('Date of birth'),required=False,)
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:

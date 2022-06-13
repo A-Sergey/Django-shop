@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+{% block title %}Find{% endblock title %}
+
+{% block body %}
+    <div class="products-test">
+        {% if product_find %}
+        {% for product in product_find %}
+            <div class="product-test">
+            <a href="/products/{{ product.name }}/">{{ product.name }}</a>
+            {% if product.sell %}
+                <p>
+                    <s>{{ product.price }} руб</s>
+                    <font color="red" size="5">{{ product.sell }} руб</font>
+                </p>
+            {% else %}
+                <p style="margin-bottom:3%;">{{ product.price }} руб</p>
+            {% endif %}
+            <img src="{{ product.image.url}}"/>
+            </div>
+        {%endfor%}
+        {% else %}
+            <div style="grid-column-start:2;text-align:center;">
+                <h1>Поиск</h1>
+                <p style="font-size: 20px;">Ничего не найдено</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="pagination-posts">
+    {% include "pagination.html" with page=page_obj %}
+    </div>
+{% endblock %}

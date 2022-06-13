@@ -1,17 +1,16 @@
-#wrapper {
-	max-width: 960px;
+.conteiner {
+	max-width: 1500px;
 	margin: auto;
 }
 
-.log {
-	float: right;
+.myshop {
+    display: inline;
+    margin-left: 32%;
+    font: 150px Brush Script MT;
+    letter-spacing: 15px;
+    color: #50a1b9;
 }
 
-/* nav ul.top-menu {
-	margin-left: auto;
-    margin-right: auto;
-	width: 51%;
-} */
 .top-menu {
     margin-inline: 23%;
 }
@@ -23,9 +22,16 @@ nav li {
 }
 .top-menu li {
 	display: inline-block;
-	padding: 10px 13%;
+	padding: 10px 12%;
 	margin: 0;
 }
+
+.footer {
+    margin: 0px auto;
+    margin-top: 3%;
+    text-align: end;
+}
+
 .top-menu li.active {
 	background: #29c5e6;
 	color: #fff;
@@ -80,7 +86,7 @@ aside > p {
 	margin: 0;
 }
 
-.xxx {
+.profile-info {
     float: right;
     padding-right: 1%;
     padding-top: 1%;
@@ -97,7 +103,7 @@ aside > p {
     background: #29c5e6;
     border: 1px solid;
     width: 50%;
-    margin-left: 32%;
+    margin-left: 23%;
     line-height: 2em;
     text-align: center;
     margin-bottom: 0px;
@@ -107,7 +113,7 @@ aside > p {
 .post {
     background: #E0FFFF;
     width: 50%;
-    margin-left: 32%;
+    margin-left: 23%;
     text-align: center;
 }
 
@@ -116,16 +122,45 @@ aside > p {
     margin-bottom: 0px;
     
 }
-.pagination {
-    margin-left: 32%;
+
+.pagination-posts {
+    margin-top: 1%;
+    margin-left: 23%;
     text-align: center;
     display: block;
     width: 50%;
 }
 
+.pagination-products {
+    margin-left: 18%;
+    text-align: center;
+    display: block;
+    width: 61%;
+}
+
+.pagination-comments {
+    margin-top: 1%;
+    text-align: center;
+    display: block;
+    width: 73%;
+}
+
 .page {
-    width: 85%;
-    padding-left: 15%;
+    width: 62%;
+    margin-left: 24%;
+}
+
+.about-us {
+    width: 62%;
+    height: 300px;
+    margin-left: 24%;
+}
+
+.login {
+    width: 62%;
+    height: 300px;
+    margin-inline: 37% auto;
+    margin-top: 5%;
 }
 
 .product {
@@ -213,25 +248,41 @@ div.name {
     position: absolute;
 
 }
-/* .reg {
+
+.products-test {
     position: relative;
-    margin-left: 40%;
+    margin-left: 18%;
+    margin-right: 21%;
+    display: grid;
+    grid-template-columns: minmax(100px, 500px) minmax(100px, 500px) minmax(100px, 500px);
+    grid-template-rows: repeat(4,250px);
+    grid-gap: 5px;
+    height: 530px;
 }
 
-.lable {
-    position: absolute;
+.product-test > a {
+    display: block;
+    font: 40px Times New Roman, sans-serif;
+    color: yellow;
+    width: 100%;
+    text-align: center;
 }
 
-.forms {
-    margin-left: 0%;
+.product-test > p {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0%;
 }
 
-.lable > p {
-    margin-bottom: 20%;
-    margin-top: 10%;
+.product-test > img {
+    height: 119px;
+    display: block;
+    margin-inline: auto;
 }
 
-.forms > p {
-    margin-top: 0px;
-    margin-bottom: 10%;
-} */
+.products-test .product-test > form {
+    display: block;
+    margin-top: 1%;
+    text-align: center;
+}

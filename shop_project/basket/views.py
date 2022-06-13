@@ -6,7 +6,6 @@ from .forms import BasketAddProductForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Q
-from django.contrib.auth.forms import AuthenticationForm
 
 
 @require_POST
@@ -45,18 +44,12 @@ def basket_detail(request):
     products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
     try:
         product_of_the_day = Product.objects.get(product_of_the_day=True)
-    except:
+    except Product.DoesNotExist:
         product_of_the_day = None
     if request.method == 'POST':
         basket_form = BasketAddProductForm(request.POST)
     else:
         basket_form = BasketAddProductForm()
-    total = 0
-    for product in basket:
-        total += product['total_price']
     return render(request, 'basket.html', {'basket':basket,
-                                           'products_sale':products_sale,
-                                           'product_of_the_day':product_of_the_day,
                                            'basket_form':basket_form,
-                                           'total':total,
-                                           'form':AuthenticationForm(),})
+                                           })

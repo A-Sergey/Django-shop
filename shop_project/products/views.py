@@ -1,6 +1,6 @@
 from .models import Product
 from django.shortcuts import render,get_object_or_404
-from .forms import CommentForm
+from .forms import CommentForm, FindProduct
 from django.contrib import auth
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -15,11 +15,6 @@ from basket.forms import BasketAddProductForm
 def products(request):
     basket = Basket(request)
     list_products = Product.objects.all()
-    products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-    try:
-        product_of_the_day = Product.objects.get(product_of_the_day=True)
-    except:
-        product_of_the_day = None
     if request.method == 'POST':
         basket_form = BasketAddProductForm(request.POST)
         if basket_form.is_valid():
@@ -29,21 +24,23 @@ def products(request):
         basket_form = BasketAddProductForm(initial={'quantity':0})
     for product in list_products:
         product.id = str(product.id)
-    context = {'list_products':list_products,'basket':basket,'form':AuthenticationForm(),
-               'basket_form':basket_form,'product_of_the_day':product_of_the_day,
-               'products_sale':products_sale,}
+    paginator = Paginator(list_products,6)
+    page = request.GET.get('page')
+    
+    try:
+        list_products = paginator.page(page)
+    except PageNotAnInteger:
+        list_products= paginator.page(1)
+    except EmptyPage:
+        list_products = paginator.page(paginator.num_pages)
+    context = {'list_products':list_products,'basket':basket,
+               'basket_form':basket_form,}
     return render(request,'products.html',context)
 
 def product(request, name):
     product = get_object_or_404(Product, name=name, )
-    try:
-        product_of_the_day = Product.objects.get(product_of_the_day=True)
-    except:
-        product_of_the_day = None
     comments = product.comments.filter(active=True)
     comments = comments.order_by('-created')
-    products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-    print(products_sale)
     basket = Basket(request)
     dict_count = {}
     count = len(comments)+1
@@ -80,11 +77,23 @@ def product(request, name):
         comments = paginator.page(paginator.num_pages)
     
     return render(request, 'product.html', {'product': product,
-                                            'products_sale': products_sale,
                                             'comments':comments,
                                             'basket':basket,
                                             'dict_count':dict_count,
                                             'comment_form':comment_form,
-                                            'basket_form':basket_form,
-                                            'form':AuthenticationForm(),
-                                            'product_of_the_day':product_of_the_day,},)
+                                            'basket_form':basket_form,},)
+                                            
+def find_product(request):
+    if request.method == 'POST':
+        find_form = FindProduct(request.POST)
+        if find_form.is_valid():
+            cd = find_form.cleaned_data
+            product_find = Product.objects.filter(name__startswith=cd['find_product'])
+            print(product_find)
+            if product_find:
+                if len(product_find) == 1:
+                    return redirect(f"/products/{cd['find_product']}/")
+    else:
+        find_form = FindProduct()
+        return redirect(request.META['HTTP_REFERER'])
+    return render(request, 'find.html', {'product_find': product_find,})

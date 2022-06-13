@@ -1,9 +1,10 @@
 {% extends "base_generic.html" %}
 {% block title %}Register{% endblock %}
 {% block body %}
-<h2 style="margin-block: 3em;text-align: center;">Sign up</h2>
+<div class="page">
 <form class="reg" method="post">
-  {% csrf_token %}
+    <h1>Sign up</h1>
+    {% csrf_token %}
 	<table>
 	<tr>
 		<td><label for="{{ reg.username.id_for_label }}">Username: </label></td>
@@ -29,4 +30,5 @@
   {#{ reg.as_p }#}
   <button type="submit">Sign up</button>
 </form>
+</div>
 {% endblock body %}

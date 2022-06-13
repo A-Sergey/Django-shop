@@ -1,77 +1,41 @@
 {% extends "base_generic.html" %}
 {% block title %}Products{% endblock title %}
-{% block login %}
-{% if not user.is_authenticated %}
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
 
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %}
-
-
-
-<form class="log" method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{% url 'login' %}?next={{request.path}}" />
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-<p><a href="{% url 'register' %}">Register</a></p>
-{% else %}
-<p>Hello, {{user.username}}!!!</p>
-<a href="{% url 'logout' %}?next={{request.path}}">Выйти</a>
-{% endif %}
-{% endblock login %}
 {% block body %}
 {% if list_products %}
-    <ul>
+    <div class="products-test">
     {% for product in list_products %}
-        <li><a href="/products/{{ product.name }}/">{{ product.name }}</a></li>
+        <div class="product-test">
+        
+        <a href="/products/{{ product.name }}/">{{ product.name }}</a>
         {% if product.sell %}
             <p>
                 <s>{{ product.price }} руб</s>
                 <font color="red" size="5">{{ product.sell }} руб</font>
             </p>
         {% else %}
-            <p>{{ product.price }} руб</p>
+            <p style="margin-bottom:3%;">{{ product.price }} руб</p>
         {% endif %}
-		<img src="{{ product.image.url}}" style="width: 10%;"/>
-				<form action="{% url 'basket_add' product.name %}" method="post">
-					{% csrf_token %}
-					<label for="{{ basket_form.quantity.id_for_label }}">Count: </label>
-                    
-                    {% for key, value in basket.basket.items %}
-                        {% if product.id == key %}
-                            <input id="{{ basket_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{value.quantity}}">
-                        {% endif %}
-                    {% endfor %}
-					{{basket_form.update}}
-					<input type="submit" value="Add to basket">
-				</form>
+		<img src="{{ product.image.url}}"/>
+		<form action="{% url 'basket_add' product.name %}" method="post">
+            {% csrf_token %}
+            {% if product.id in basket.basket.keys %}
+                <label for="{{ basket_form.quantity.id_for_label }}">Count: </label>
+            {% endif %}
+            {% for key, value in basket.basket.items %}
+                {% if product.id == key %}
+                    <input id="{{ basket_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{value.quantity}}" style="width: 40px;">
+                {% endif %}
+            {% endfor %}
+			{{basket_form.update}}
+			<input class="add-basket" type="submit" value="Add to basket">
+		</form>
+        </div>
     {% endfor %}
-    </ul>
+    </div>
+    <div class="pagination-products">
+    {% include "pagination.html" with page=list_products %}
+    </div>
 {% else %}
     <p>No product are available.</p>
 {% endif %}

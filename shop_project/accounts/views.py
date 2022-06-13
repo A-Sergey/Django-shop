@@ -5,91 +5,24 @@ from .models import CustomUser
 from products.models import Product
 from django.db.models import Q 
 from django.shortcuts import redirect, render
-from django.contrib.auth.views import PasswordResetView as PasswordReset
-from django.contrib.auth.views import PasswordResetDoneView as PasswordResetDone
-from django.contrib.auth.views import PasswordResetConfirmView as PasswordResetConfirm
-from django.contrib.auth.views import PasswordResetCompleteView as PasswordResetComplete
 from django.contrib.auth.views import LoginView as Login
 from django.contrib import auth
 from .forms import RegisterForm, ProfileForm
 
 class RegisterView(generic.CreateView):
-
     form_class = RegisterForm
     template_name = 'registration/register.html'
-
-    def get_context_data(self, **kwargs):
-        try:
-            product_of_the_day = Product.objects.get(product_of_the_day=True)
-        except:
-            product_of_the_day = None
-        products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-        if 'reg' not in kwargs:
-            kwargs['reg'] = self.get_form()
-        kwargs['product_of_the_day'] = product_of_the_day
-        kwargs['products_sale'] = products_sale
-        return super().get_context_data(**kwargs)
         
     def get_success_url(self):
         return reverse('news')
-
-class PasswordResetView(PasswordReset):
+        
     def get_context_data(self, **kwargs):
-        try:
-            product_of_the_day = Product.objects.get(product_of_the_day=True)
-        except:
-            product_of_the_day = None
-        products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
         if 'reg' not in kwargs:
             kwargs['reg'] = self.get_form()
-        kwargs['product_of_the_day'] = product_of_the_day
-        kwargs['products_sale'] = products_sale
-        return super().get_context_data(**kwargs)
-        
-class PasswordResetDoneView(PasswordResetDone):
-    def get_context_data(self, **kwargs):
-        try:
-            product_of_the_day = Product.objects.get(product_of_the_day=True)
-        except:
-            product_of_the_day = None
-        products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-        kwargs['product_of_the_day'] = product_of_the_day
-        kwargs['products_sale'] = products_sale
         return super().get_context_data(**kwargs)
 
-class PasswordResetConfirmView(PasswordResetConfirm):
-    def get_context_data(self, **kwargs):
-        try:
-            product_of_the_day = Product.objects.get(product_of_the_day=True)
-        except:
-            product_of_the_day = None
-        products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-        kwargs['product_of_the_day'] = product_of_the_day
-        kwargs['products_sale'] = products_sale
-        return super().get_context_data(**kwargs)
-
-class PasswordResetCompleteView(PasswordResetComplete):
-    def get_context_data(self, **kwargs):
-        try:
-            product_of_the_day = Product.objects.get(product_of_the_day=True)
-        except:
-            product_of_the_day = None
-        products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-        kwargs['product_of_the_day'] = product_of_the_day
-        kwargs['products_sale'] = products_sale
-        return super().get_context_data(**kwargs)
 
 class LoginView(Login):
-    def get_context_data(self, **kwargs):
-        try:
-            product_of_the_day = Product.objects.get(product_of_the_day=True)
-        except:
-            product_of_the_day = None
-        products_sale = Product.objects.filter(~Q(sell = "")&Q(product_of_the_day=False))
-        kwargs['product_of_the_day'] = product_of_the_day
-        kwargs['products_sale'] = products_sale
-        return super().get_context_data(**kwargs)
-    
     def get_success_url(self):
         return reverse('news')
 
@@ -117,6 +50,5 @@ def profile(request):
 
     return render(request, 'registration/profile.html', {'user': user,
                                                          'user_form': user_form,
-                                                         'products_sale': products_sale,
-                                                         'product_of_the_day': product_of_the_day,},)
+                                                        },)
     

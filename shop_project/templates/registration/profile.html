@@ -2,17 +2,22 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
+    <div class="page" style="text-align:center; margin-left:18%; margin-top:3%;">
     <h1>Profile</h1>
     <form action="/accounts/profile/" method="post">
         {% csrf_token %}
         <div class='email'>
-            <label for="{{ user_form.email.id_for_label }}">Email: </label>
+            {{user_form.email.label_tag}}
             <p>{{user_form.email}}</p>
+            {{ user_form.errors.email }}
         </div>
         <div class='birth'>
-            <label for="{{ user_form.date_of_birth.id_for_label }}">Date of birth: </label>
-			<p><input id="{{ user_form.date_of_birth.id_for_label }}" type="text" name="date_of_birth" placeholder="{{ user.date_of_birth|date:"d.m.Y" }}"></p>
+            {#<label for="{{ user_form.date_of_birth.id_for_label }}">Date of birth: </label>#}
+            {{user_form.date_of_birth.label_tag}}
+			<p><input id="{{ user_form.date_of_birth.id_for_label }}" type="text" name="date_of_birth" placeholder="{{ user.date_of_birth|date:'d.m.Y' }}"></p>
+            {{ user_form.errors.date_of_birth }}
         </div>
         <p><input type="submit" value="Update profile"></p>
     </form>
+    </div>
 {% endblock %}
