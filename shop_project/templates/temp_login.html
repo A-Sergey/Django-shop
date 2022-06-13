@@ -17,14 +17,13 @@
   <table>
 
   <tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
+    <td><label for="id_username_login">Имя пользователя:</label></td>
+    <td><input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="50" required id="id_username_login"></td>
   </tr>
 
   <tr>
     <td><label for="id_password">Пароль: </label></td>
-    <td><input id="id_password" name="password" type="password" autocomplete="current-password"></td>
-    <!-- <td>{{ form.password }}</td> -->
+    <td><input type="password" name="password" autocomplete="current-password" required id="id_password"></td>
   </tr>
   </table>
 

@@ -147,11 +147,17 @@ aside > p {
 
 .page {
     width: 62%;
-    margin-left: 24%;
+    height: 300px;
 }
 
 .about-us {
     width: 62%;
+    height: 300px;
+    margin-left: 24%;
+}
+
+.basket-page {
+    width: 50%;
     height: 300px;
     margin-left: 24%;
 }
