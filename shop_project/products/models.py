@@ -3,12 +3,14 @@ from accounts.models import CustomUser
 
 class Product(models.Model):
 
-    name = models.CharField(max_length=20,)
+    name = models.CharField(max_length=20, unique=True)
     price = models.CharField(max_length=10,)
     sell = models.CharField(max_length=10, default='',blank = True)
     description = models.CharField(max_length=300,)
+    quantity = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/', default='images/111.jpg')
     product_of_the_day = models.BooleanField(default=False)
+    visible_in_shop = models.BooleanField(default=True)
     
     def get_price(self):
         if self.sell:

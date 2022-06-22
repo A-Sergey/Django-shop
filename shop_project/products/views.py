@@ -14,7 +14,7 @@ from basket.forms import BasketAddProductForm
 
 def products(request):
     basket = Basket(request)
-    list_products = Product.objects.all()
+    list_products = Product.objects.filter(visible_in_shop=True)
     if request.method == 'POST':
         basket_form = BasketAddProductForm(request.POST)
         if basket_form.is_valid():
@@ -88,11 +88,11 @@ def find_product(request):
         find_form = FindProduct(request.POST)
         if find_form.is_valid():
             cd = find_form.cleaned_data
-            product_find = Product.objects.filter(name__startswith=cd['find_product'])
+            product_find = Product.objects.filter(Q(visible_in_shop = True)&Q(name__startswith=cd['find_product']))
             print(product_find)
             if product_find:
                 if len(product_find) == 1:
-                    return redirect(f"/products/{cd['find_product']}/")
+                    return redirect(f"/products/{product_find[0].name}/")
     else:
         find_form = FindProduct()
         return redirect(request.META['HTTP_REFERER'])
