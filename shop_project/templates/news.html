@@ -2,13 +2,15 @@
 {% block title %}News{% endblock title %}
 
 {% block body %}
-    {% for post in posts %}
-        <p class="publish">Published: {{post.publish}}</p>
-        <div class="post">
-        {{post.body|linebreaks}}</p>
+    <div class='tab'>
+        {% for post in posts %}
+            <p class="publish">Published: {{post.publish}}</p>
+            <div class="post">
+            {{post.body|linebreaks}}</p>
+            </div>
+        {%endfor%}
+        <div class="pagination-posts">
+        {% include "pagination.html" with page=page_obj %}
         </div>
-    {%endfor%}
-    <div class="pagination-posts">
-    {% include "pagination.html" with page=page_obj %}
     </div>
 {% endblock %}

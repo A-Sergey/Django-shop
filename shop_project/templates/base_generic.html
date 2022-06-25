@@ -9,10 +9,11 @@
 
 </head>
 <body>
-    <div class="conteiner">
-        <div id="header">
+    <div id="conteiner">
             <header>
-                <a href="/" class="myshop">My shop</a>
+                <div class="myshop">
+                    <a href="/">My shop</a>
+                </div>
                 <div class="profile-info">
                     {% if request.path != '/accounts/login/' %}
                         {% include 'temp_login.html' %}
@@ -32,9 +33,9 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
-                <form action="{% url 'find_product' %}" method="post" style="float: right;">
+                <form action="{% url 'find_product' %}" method="post">
                     {% csrf_token %}
-                    {{find_form}}
+                    <td>{{ find_form.find_product }}</td>
                     <input type="submit" value="Find">
                 </form>
             </nav>
@@ -63,19 +64,18 @@
                 <p><img src="{{product_of_the_day.image.url}}" width="100%" height="100%"></p>
                 {#<p><img src="/static/images/sample.png" width="100%" height="100%"></p>#}
             </aside>
-            {% for key, value in names_menu.items %}
-            {% if key == request.path %}
-            <h1 class="head" style="margin-left: 17%;width: 62%;">{{value|upper}}</h1>
-            {% endif %}
-        {% endfor %}
-            
-            {% block body %}{% endblock %}
-        </div>
-    
+            <div class='main_body'>
+                {% for key, value in names_menu.items %}
+                    {% if key == request.path %}
+                        <h1 class="head">{{value|upper}}</h1>
+                    {% endif %}
+                {% endfor %}
+                {% block body %}{% endblock %}
+            </div>
         <footer class="footer">
             <p class="line"></p>
             <div>
-                Copyright
+                ©Copyright
             </div>
         </footer>
     </div>
