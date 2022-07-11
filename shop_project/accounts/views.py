@@ -22,9 +22,9 @@ class RegisterView(generic.CreateView):
         return super().get_context_data(**kwargs)
 
 
-class LoginView(Login):
-    def get_success_url(self):
-        return reverse('news')
+# class LoginView(Login):
+#     def get_success_url(self):
+#         return reverse(request.path)
 
 def profile(request):
     user = CustomUser.objects.get(username=auth.get_user(request))

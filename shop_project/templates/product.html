@@ -3,10 +3,10 @@
 
 {% block body %}
 <div class="page">
-    <div class="product">
-        <div class="name"><p>{{ product.name }}</p></div>
+    <div class="product_single">
+        <div class="name"><h2>{{ product.name }}</h2></div>
         <div class="product-image">
-            <img src="{{ product.image.url }}" style="width: 25%;"/>
+            <img src="{{ product.image.url }}" style="width: 300px;"/>
         </div>
         <div class="product-info">
             {% if product.sell %}

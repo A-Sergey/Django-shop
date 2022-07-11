@@ -3,9 +3,9 @@
 
 {% block body %}
 {% if list_products %}
-    <div class="products-test">
+    <div class="products">
     {% for product in list_products %}
-        <div class="product-test">
+        <div class="product">
         
         <a href="/products/{{ product.name }}/">{{ product.name }}</a>
         {% if product.sell %}
@@ -14,7 +14,7 @@
                 <font color="red" size="5">{{ product.sell }} руб</font>
             </p>
         {% else %}
-            <p style="margin-bottom:3%;">{{ product.price }} руб</p>
+            <p style="margin-bottom: 4%; margin-top: 6%;">{{ product.price }} руб</p>
         {% endif %}
 		<img src="{{ product.image.url}}"/>
 		<form action="{% url 'basket_add' product.name %}" method="post">

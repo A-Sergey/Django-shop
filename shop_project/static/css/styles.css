@@ -20,6 +20,18 @@
     width: 315px;
 }
 
+.log_top {
+    margin-top: 5%;
+}
+
+.log_top input:nth-child(3) {
+    float: right;
+}
+
+.profile-info p > a {
+    text-decoration: none;
+}
+
 nav {
 	display: inline-block;
 	width: 100%
@@ -64,7 +76,7 @@ aside {
 }
 
 .main_body {
-    width: 60%;
+    width: 75%;
     margin-left: 20%;
     text-align: center;
     min-height: 400px;
@@ -78,16 +90,13 @@ aside {
 	border: none;
 }
 
-.aside-menu > h1,h2 {
-	text-align: center;
-}
-
 aside > h2 {
 	background: #29c5e6;
 	font: 90% 'Oswald', sans-serif;
 	color: #fff;
 	padding: 4%;
 	margin: 7% 0 0 0;
+    text-align: center;
 }
 
 aside > p {
@@ -125,7 +134,6 @@ aside > p {
 }
 
 .tab {
-    width: 70%;
     margin-inline: 15%;
 }
 
@@ -143,6 +151,151 @@ aside > p {
 
 .post > p {
     margin-top: 0px;
-    margin-bottom: 0px;
-    
+}
+
+.products {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(100px, 500px) minmax(100px, 500px) minmax(100px, 500px);
+    grid-template-rows: repeat(4,250px);
+    grid-gap: 5px;
+    height: 530px;
+}
+
+.product > a {
+    display: block;
+    font: 25px Times New Roman, sans-serif;
+    color: #60a3dd;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.product > p {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+    margin-top: 4%;
+}
+
+.product > img {
+    height: 119px;
+    display: block;
+    margin-inline: auto;
+}
+
+.products .product > form {
+    display: block;
+    margin-top: 1%;
+    text-align: center;
+}
+
+.pagination-products {
+    margin-left: 18%;
+    text-align: center;
+    display: block;
+    width: 61%;
+}
+
+.product_single {
+    position: relative;
+    text-align: start;
+    margin-left: 5%;
+    top: 50px;
+}
+
+
+.product-image {
+    display: inline-block;
+}
+.product-info {
+    position: relative;
+    display: inline-block;
+    left: 0%;
+    width: 49%;
+    bottom: 140px
+}
+
+.product-info > p{
+    background: #E0FFFF;
+    height: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    margin: 0;
+}
+
+.basket {
+    position: relative;
+    bottom: 100px;
+}
+
+p.description{
+    background: #F1FDF7;
+    padding-bottom: 26%;
+}
+
+.user{
+    background: #CADDD3;
+    border-style: inset;
+    border-color: #cacd58;
+    width: 36%;
+    border-radius: 51%;
+    text-align: center;
+}
+
+.comment{
+    background: #CADDD3;
+    border-style: inset;
+    border-color: #cacd58;
+    width: 73%;
+    border-radius: 1%;
+}
+
+.add-comment{
+    margin-right: 26%;
+}
+
+.add-comment form > textarea{
+    width: 55%;
+}
+
+.pagination-comments {
+    margin-right: 27%;
+}
+
+.reg {
+    margin: auto;
+    width: fit-content;
+    margin-top: 5%;
+}
+
+.restore_password {
+    margin-top:5%;
+}
+
+.restore_password form ul {
+    width: 54%;
+    margin-inline: 21%;
+}
+
+.restore_password form > p {
+    text-align: right;
+    margin-right: 37%;
+}
+
+form.log {
+    margin-top: 5%;
+    text-align: left;
+    margin-inline: auto;
+    width: 30%;
+}
+
+.log input:nth-child(3) {
+    position: relative;
+    left: 40%;
+}
+
+.login p > a {
+    text-decoration: none;
 }

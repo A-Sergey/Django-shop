@@ -1,4 +1,4 @@
-Django=>3.2.13
+Django=>4.0.4
 Pillow==6.0.0
 webdriver-manager==3.7.0
 selenium==3.141.0
