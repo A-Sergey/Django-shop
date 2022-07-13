@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1!t$^ye&jyx6#n@g9&snfkrwfl!mj*udn#lahz2=g9!d7_==o-'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -84,12 +84,12 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
-		'USER': '',     # Not used with sqlite3.
-		'PASSWORD': '', # Not used with sqlite3.
-		'HOST': '',     # Set to empty string for localhost. Not used with sqlite3.
-		'PORT': '',     # Set to empty string for default. Not used with sqlite3.        
+        'ENGINE': os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        'NAME': os.environ.get("SQL_DATABASE", str(os.path.join(BASE_DIR, "db.sqlite3"))),
+		'USER': os.environ.get("SQL_USER", ''),     # Not used with sqlite3.
+		'PASSWORD': os.environ.get("SQL_PASSWORD", ''), # Not used with sqlite3.
+		'HOST': os.environ.get("SQL_HOST", ''),     # Set to empty string for localhost. Not used with sqlite3.
+		'PORT': os.environ.get("SQL_PORT", ''),     # Set to empty string for default. Not used with sqlite3.        
     }
 }
 
