@@ -3,4 +3,5 @@ migrations/
 *.sqlite3
 *.exe
 *.jpg
+*.png
 *venv*/
