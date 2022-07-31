@@ -22,11 +22,13 @@ class Product(models.Model):
                         args=[])
                               
     def __str__(self):
-        return '='.join([self.name, self. price+' руб'])
+        return '='.join([self.name, self.price+' руб'])
 
 class Comment(models.Model):
-    product = models.ForeignKey(Product, related_name='comments',on_delete=models.CASCADE)
-    author = models.ForeignKey(CustomUser, related_name='user',on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='comments',
+                                on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, related_name='user',
+                                on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -37,3 +39,4 @@ class Comment(models.Model):
     
     def __str__(self):
         return 'Comment by {} on {}'.format(self.author, self.product)
+

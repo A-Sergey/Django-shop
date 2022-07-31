@@ -7,4 +7,6 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 class FindProduct(forms.Form):
-    find_product = forms.CharField(label="Поиск",widget=forms.TextInput(attrs={'placeholder': 'Search'}))
+    find_product = forms.CharField(
+                    label="Поиск",
+                    widget=forms.TextInput(attrs={'placeholder': 'Search'}))

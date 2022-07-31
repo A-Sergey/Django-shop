@@ -55,12 +55,8 @@ class Basket(object):
         Remove product from the basket
         """
         product_id = str(product.id)
-        print('>',product_id)
-        print('>>',self.basket)
         if product_id in self.basket:
-            print('>>>',self.basket)
             del self.basket[product_id]
-            print('>>>>',self.basket)
             self.save()
     
     def __iter__(self):
@@ -88,7 +84,8 @@ class Basket(object):
         """
         Calculation of the cost of goods in the basket.
         """
-        return sum(int(item['price']) * int(item['quantity']) for item in self.basket.values())
+        return sum(int(item['price']) * int(item['quantity'])
+                        for item in self.basket.values())
     
     def clear(self):
         del self.session[settings.BASKET_SESSION_ID]

@@ -1,6 +1,4 @@
-from .models import Product
 from django.shortcuts import render,get_object_or_404
-from .forms import CommentForm, FindProduct
 from django.contrib import auth
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -8,9 +6,10 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from django.contrib.auth.forms import AuthenticationForm
 from basket.basket import Basket
 from basket.forms import BasketAddProductForm
+from .forms import CommentForm, FindProduct
+from .models import Product
 
 def products(request):
     basket = Basket(request)
@@ -88,7 +87,8 @@ def find_product(request):
         find_form = FindProduct(request.POST)
         if find_form.is_valid():
             cd = find_form.cleaned_data
-            product_find = Product.objects.filter(Q(visible_in_shop = True)&Q(name__startswith=cd['find_product']))
+            product_find = Product.objects.filter(Q(visible_in_shop = True)&
+                            Q(name__startswith=cd['find_product']))
             print(product_find)
             if product_find:
                 if len(product_find) == 1:
@@ -97,3 +97,4 @@ def find_product(request):
         find_form = FindProduct()
         return redirect(request.META['HTTP_REFERER'])
     return render(request, 'find.html', {'product_find': product_find,})
+

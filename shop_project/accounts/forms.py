@@ -1,8 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.utils.translation import gettext as _
 from django import forms
 from .models import CustomUser
-from shop import settings
-from django.utils.translation import gettext as _
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(label='Email')
@@ -10,7 +9,7 @@ class RegisterForm(UserCreationForm):
     
     class Meta:
         model = CustomUser
-        fields = ("username",'email','date_of_birth')
+        fields = ("username", 'email', 'date_of_birth')
         
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
@@ -21,15 +20,16 @@ class RegisterForm(UserCreationForm):
         return user
 
 class ProfileForm(forms.Form):
-    email = forms.EmailField(label=_('Email'),required=False)
-    date_of_birth = forms.DateField(label=_('Date of birth'),required=False,)
+    email = forms.EmailField(label=_('Email'), required=False)
+    date_of_birth = forms.DateField(label=_('Date of birth'), required=False,)
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('username','email','date_of_birth',)
+        fields = ('username', 'email', 'date_of_birth',)
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username','email','date_of_birth',)
+        fields = ('username', 'email', 'date_of_birth',)
+

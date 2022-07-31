@@ -1,6 +1,5 @@
-from .views import basket_add, basket_remove, basket_detail, basket_clear
 from django.urls import path
-import products.urls
+from .views import basket_add, basket_remove, basket_detail, basket_clear
 
 urlpatterns = [
     path('', basket_detail),

@@ -8,3 +8,4 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['publish']
 
 admin.site.register(Post, PostAdmin)
+
