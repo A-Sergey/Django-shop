@@ -4,20 +4,20 @@
 }
 .myshop > a {
     display: inline;
-    margin-left: 32%;
-    font: 150px Brush Script MT;
+    margin-left: 22vmax;
+    font: 6vmax Brush Script MT;
     letter-spacing: 15px;
     color: #50a1b9;
 }
 
 .myshop {
     display: inline-block;
-    width: 1180px;
+    width: 57vmax;
 }
 
 .profile-info {
     display: inline-block;
-    width: 315px;
+    width: 20vmax;
 }
 
 .log_top {
@@ -26,6 +26,7 @@
 
 .log_top input:nth-child(3) {
     float: right;
+		margin-right: 1vmax;
 }
 
 .profile-info p > a {
@@ -178,7 +179,7 @@ aside > p {
     margin-top: 4%;
 }
 
-.product > img {
+.product a > img {
     height: 119px;
     display: block;
     margin-inline: auto;
@@ -298,3 +299,4 @@ form.log {
 .login p > a {
     text-decoration: none;
 }
+

@@ -17,15 +17,14 @@ def products(request):
     if request.method == 'POST':
         basket_form = BasketAddProductForm(request.POST)
         if basket_form.is_valid():
-            pass
-        return redirect(request.META['HTTP_REFERER'])
+            return redirect(request.META['HTTP_REFERER'])
     else:
         basket_form = BasketAddProductForm(initial={'quantity':0})
     for product in list_products:
         product.id = str(product.id)
     paginator = Paginator(list_products,6)
     page = request.GET.get('page')
-    
+
     try:
         list_products = paginator.page(page)
     except PageNotAnInteger:
@@ -67,21 +66,21 @@ def product(request, name):
             basket_form = BasketAddProductForm(initial={'quantity':0})
     paginator = Paginator(comments,5,orphans=1)
     page = request.GET.get('page')
-    
+
     try:
         comments = paginator.page(page)
     except PageNotAnInteger:
         comments= paginator.page(1)
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
-    
+
     return render(request, 'product.html', {'product': product,
                                             'comments':comments,
                                             'basket':basket,
                                             'dict_count':dict_count,
                                             'comment_form':comment_form,
                                             'basket_form':basket_form,},)
-                                            
+
 def find_product(request):
     if request.method == 'POST':
         find_form = FindProduct(request.POST)

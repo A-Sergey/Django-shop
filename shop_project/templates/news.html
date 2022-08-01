@@ -1,12 +1,12 @@
 {% extends "base_generic.html" %}
-{% block title %}News{% endblock title %}
+{% block title %}Новости{% endblock title %}
 
 {% block body %}
     <div class='tab'>
         {% for post in posts %}
-            <p class="publish">Published: {{post.publish}}</p>
+            <p class="publish">Опубликовано: {{post.publish}}</p>
             <div class="post">
-            {{post.body|linebreaks}}</p>
+            <p>{{post.body|linebreaks}}</p>
             </div>
         {%endfor%}
         <div class="pagination-posts">
@@ -14,3 +14,4 @@
         </div>
     </div>
 {% endblock %}
+

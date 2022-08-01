@@ -1,12 +1,12 @@
 {% extends "base_generic.html" %}
-{% block title %}Products{% endblock title %}
+{% block title %}Продукты{% endblock title %}
 
 {% block body %}
 {% if list_products %}
     <div class="products">
     {% for product in list_products %}
         <div class="product">
-        
+
         <a href="/products/{{ product.name }}/">{{ product.name }}</a>
         {% if product.sell %}
             <p>
@@ -16,7 +16,7 @@
         {% else %}
             <p style="margin-bottom: 4%; margin-top: 6%;">{{ product.price }} руб</p>
         {% endif %}
-		<img src="{{ product.image.url}}"/>
+		<a href="/products/{{ product.name }}/"><img src="{{ product.image.url}}"/></a>
 		<form action="{% url 'basket_add' product.name %}" method="post">
             {% csrf_token %}
             {% if product.id in basket.basket.keys %}
@@ -28,8 +28,9 @@
                 {% endif %}
             {% endfor %}
 			{{basket_form.update}}
-			<input class="add-basket" type="submit" value="Add to basket">
+			<input class="add-basket" type="submit" value="Добавить">
 		</form>
+    <p>Max: {{product.quantity}}</p>
         </div>
     {% endfor %}
     </div>
@@ -40,3 +41,4 @@
     <p>No product are available.</p>
 {% endif %}
 {% endblock %}
+

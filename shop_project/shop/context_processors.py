@@ -2,11 +2,11 @@ from products.models import Product
 from basket.basket import Basket
 from django.contrib.auth.forms import AuthenticationForm
 from products.forms import FindProduct
-from django.db.models import Q 
+from django.db.models import Q
 
 def menu(request):
-    names_menu = {'/':'News', '/products/':'Products',
-                '/about_us/':'About Us'}
+    names_menu = {'/':'Новости', '/products/':'Продукты',
+                '/about_us/':'О нас'}
     return {"names_menu": names_menu}
 
 def page_objects(request):
@@ -28,4 +28,3 @@ def page_objects(request):
             'find_form': FindProduct(),
             'total': total,
             }
-

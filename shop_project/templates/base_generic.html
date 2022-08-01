@@ -19,7 +19,7 @@
                         {% include 'temp_login.html' %}
                     {% endif %}
                     {% if user.is_authenticated %}
-                        <p><a href="/basket/">Basket {{total}} руб</a></p>
+                        <p><a href="/basket/">Корзина {{total}} руб</a></p>
                     {% endif %}
                 </div>
             </header>
@@ -36,14 +36,14 @@
                 <form action="{% url 'find_product' %}" method="post">
                     {% csrf_token %}
                     <td>{{ find_form.find_product }}</td>
-                    <input type="submit" value="Find">
+                    <input type="submit" value="Поиск">
                 </form>
             </nav>
             <aside>
                 <nav>
                     <ul class="aside-menu">
                         {% if products_sale %}
-                        <h1>SALE</h1>
+                        <h1>Распродажа</h1>
                         {% for product in products_sale%}
                             {% if product.product_of_the_day == False %}
                                 {% if "/products/"|add:product.name in request.path %}
@@ -57,14 +57,14 @@
                     </ul>
                 </nav>
                 {%if product_of_the_day%}
-				    <h2>Product of the day = {{product_of_the_day.get_price}} !!!</h2>
+				    <h2>Товар дня = {{product_of_the_day.get_price}} !!!</h2>
                     {% if "/products/"|add:product_of_the_day.name in request.path %}
 						<p><img src="{{product_of_the_day.image.url}}" width="100%" height="100%"></a></p>
                     {% else %}
-						<p><a href="{% url 'product' product_of_the_day.name %}"><img src="{{product_of_the_day.image.url}}" width="100%" height="100%"></a></p>          
+						<p><a href="{% url 'product' product_of_the_day.name %}"><img src="{{product_of_the_day.image.url}}" width="100%" height="100%"></a></p>
                     {% endif %}
                 {%else%}
-                    <h2>No product of the day</h2>
+                    <h2>Нет товара дня</h2>
                     <p><img src="/static/images/noImage.png" width="100%" height="100%"></p>
                 {% endif %}
             </aside>

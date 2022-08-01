@@ -17,7 +17,7 @@
             {% else %}
                 <p class="price">{{ product.price }} руб</p>
             {% endif %}
-    
+
         <p class="description">{{ product.description }}</p>
         </div>
 		<div class="basket">
@@ -26,7 +26,7 @@
 					{% csrf_token %}
 					{{basket_form.quantity}}
 					{{basket_form.update}}
-					<input type="submit" value="Add to basket">
+					<input type="submit" value="Добавить">
 				</form>
 			</span>
 		</div>
@@ -49,7 +49,7 @@
                 <div class="comment">
                     <div class="date">
                         <span>{{comment.created}}</span>
-                        {% if comment.created != comment.updated %} 
+                        {% if comment.created != comment.updated %}
                             <span>(Update:{{comment.updated}})</span>
                         {% endif %}
                         <p class="line"> </p>
@@ -63,7 +63,7 @@
             <div class="comment"><p>No comments.</p></div>
         {% endfor %}
     <div class="pagination-comments">
-    {% include "pagination.html" with page=comments %}        
+    {% include "pagination.html" with page=comments %}
     </div>
     </div>
 
@@ -79,3 +79,4 @@
     </div>
 </div>
 {% endblock %}
+

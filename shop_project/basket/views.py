@@ -16,9 +16,15 @@ def basket_add(request, name):
         if cd['quantity'] == 0:
             basket_remove(request,name)
             return redirect(request.META['HTTP_REFERER'])
-        basket.add(product=product,
-                   quantity=cd['quantity'],
-                   update_quantity=cd['update'])
+        if product.quantity >= cd['quantity']:
+            print(product.quantity)
+            basket.add(product=product,
+                       quantity=cd['quantity'],
+                       update_quantity=cd['update'])
+        else:
+            basket.add(product=product,
+                       quantity=product.quantity,
+                       update_quantity=cd['update'])
     else:
         basket.add(product=product,
                    quantity=1,
@@ -45,4 +51,3 @@ def basket_detail(request):
     return render(request, 'basket.html', {'basket':basket,
                                            'basket_form':basket_form,
                                            })
-
