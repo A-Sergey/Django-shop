@@ -24,7 +24,6 @@ def products(request):
         product.id = str(product.id)
     paginator = Paginator(list_products,6)
     page = request.GET.get('page')
-
     try:
         list_products = paginator.page(page)
     except PageNotAnInteger:
@@ -42,23 +41,33 @@ def product(request, name):
     basket = Basket(request)
     dict_count = {}
     count = len(comments)+1
+    try:
+        editable_comment_id = int(request.GET.get('editable_comment_id'))
+    except TypeError:
+        editable_comment_id=None
     for comment in comments:
         count -=1
         dict_count.update({comment.id:count})
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         basket_form = BasketAddProductForm(request.POST)
+        if editable_comment_id:
+            comment = product.comments.get(id=editable_comment_id)
+            edit_comment = request.POST.get('edit_comment')
+            if (request.user == comment.author) and (comment.product == product):
+                comment.body = edit_comment
+                comment.save()
+                return HttpResponseRedirect(reverse("product",args=[name]))
+
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.product = product
             new_comment.author = auth.get_user(request)
             new_comment.save()
         if basket_form.is_valid():
-            pass
-        return HttpResponseRedirect(reverse("product",args=[name]))
+            return HttpResponseRedirect(reverse("product",args=[name]))
     else:
         comment_form = CommentForm()
-        comment_form.cleanquantity = 0
         try:
             quantity = basket.basket[str(product.id)]['quantity']
             basket_form = BasketAddProductForm(initial={'quantity':quantity})
@@ -66,7 +75,6 @@ def product(request, name):
             basket_form = BasketAddProductForm(initial={'quantity':0})
     paginator = Paginator(comments,5,orphans=1)
     page = request.GET.get('page')
-
     try:
         comments = paginator.page(page)
     except PageNotAnInteger:
@@ -74,12 +82,16 @@ def product(request, name):
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
 
-    return render(request, 'product.html', {'product': product,
-                                            'comments':comments,
-                                            'basket':basket,
-                                            'dict_count':dict_count,
-                                            'comment_form':comment_form,
-                                            'basket_form':basket_form,},)
+    return render(
+        request, 'product.html', {'product': product,
+                                'comments':comments,
+                                'basket':basket,
+                                'dict_count':dict_count,
+                                'comment_form':comment_form,
+                                'basket_form':basket_form,
+                                'editable_comment_id':editable_comment_id
+                                }
+                )
 
 def find_product(request):
     if request.method == 'POST':
@@ -88,7 +100,6 @@ def find_product(request):
             cd = find_form.cleaned_data
             product_find = Product.objects.filter(Q(visible_in_shop = True)&
                             Q(name__startswith=cd['find_product']))
-            print(product_find)
             if product_find:
                 if len(product_find) == 1:
                     return redirect(f"/products/{product_find[0].name}/")
@@ -96,4 +107,3 @@ def find_product(request):
         find_form = FindProduct()
         return redirect(request.META['HTTP_REFERER'])
     return render(request, 'find.html', {'product_find': product_find,})
-

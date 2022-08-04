@@ -157,9 +157,9 @@ aside > p {
     position: relative;
     display: grid;
     grid-template-columns: minmax(100px, 500px) minmax(100px, 500px) minmax(100px, 500px);
-    grid-template-rows: repeat(4,250px);
+    grid-template-rows: repeat(4,290px);
     grid-gap: 5px;
-    height: 530px;
+    height: 590px;
 }
 
 .product > a {
@@ -252,6 +252,17 @@ p.description{
     border-radius: 1%;
 }
 
+.comment form > textarea {
+	width: 98%;
+	height: 100%;
+}
+
+.comment .comment-text {
+	text-align: left;
+	width: 100%;
+	word-wrap: break-word;
+}
+
 .add-comment{
     margin-right: 26%;
 }
@@ -288,7 +299,7 @@ form.log {
     margin-top: 5%;
     text-align: left;
     margin-inline: auto;
-    width: 30%;
+    width: 27vmax;
 }
 
 .log input:nth-child(3) {
@@ -299,4 +310,3 @@ form.log {
 .login p > a {
     text-decoration: none;
 }
-

@@ -45,19 +45,30 @@
                             <p>Comment {{ value }} by {{comment.author}} </p>
                         {% endif %}
                     {% endfor %}
+                    <a href="{{request.path}}?editable_comment_id={{comment.id}}">Редактировать</a>
                 </div>
-                <div class="comment">
-                    <div class="date">
-                        <span>{{comment.created}}</span>
-                        {% if comment.created != comment.updated %}
-                            <span>(Update:{{comment.updated}})</span>
-                        {% endif %}
-                        <p class="line"> </p>
+                {% if editable_comment_id == comment.id %}
+                    <div class="comment">
+                    <form action="" method="post">
+                      {% csrf_token %}
+                      <textarea name="edit_comment">{{comment.body}}</textarea></br>
+                      <input type="submit" name="post" class="submit-post" value="Отправить">
+                    </form>
                     </div>
-                    <div class="comment-text">
-                        <p>{{comment.body}}</p>
+                {% else %}
+                    <div class="comment">
+                        <div class="date">
+                            <span>{{comment.created}}</span>
+                            {% if comment.created != comment.updated %}
+                                <span>(Update:{{comment.updated}})</span>
+                            {% endif %}
+                            <p class="line"> </p>
+                        </div>
+                        <div class="comment-text">
+                            {{comment.body|linebreaksbr}}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endif %}
             {% empty %}
             <div class="comment"><p>No comments.</p></div>

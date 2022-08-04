@@ -7,28 +7,28 @@
     {% csrf_token %}
 	<table>
 	<tr>
-		<td><label for="{{ reg.username.id_for_label }}">Username: </label></td>
+		<td><label for="{{ reg.username.id_for_label }}">Имя пользователя: </label></td>
 		<td>{{reg.username}}</td>
 	</tr>
 	<tr>
-		<td><label for="{{ reg.email.id_for_label }}">Email: </label></td>
+		<td><label for="{{ reg.email.id_for_label }}">E-mail: </label></td>
 		<td>{{reg.email}}</td>
 	</tr>
 	<tr>
-		<td><label for="{{ reg.date_of_birth.id_for_label }}">Date of birth: </label></td>
+		<td><label for="{{ reg.date_of_birth.id_for_label }}">Дата рождения: </label></td>
 		<td>{{reg.date_of_birth}}</td>
 	</tr>
 	<tr>
-		<td><label for="{{ reg.password1.id_for_label }}">Password: </label></td>
+		<td><label for="{{ reg.password1.id_for_label }}">Пароль: </label></td>
 		<td>{{reg.password1}}</td>
 	</tr>
 	<tr>
-		<td><label for="{{ reg.password2.id_for_label }}">Password(confirm): </label></td>
+		<td><label for="{{ reg.password2.id_for_label }}">Пароль(повторно): </label></td>
 		<td>{{reg.password2}}</td>
 	</tr>
 	</table>
-  {#{ reg.as_p }#}
-  <button type="submit">Sign up</button>
+  <button type="submit">Регистрация</button>
 </form>
 </div>
 {% endblock body %}
+
