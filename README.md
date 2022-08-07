@@ -25,5 +25,6 @@ Windows:
 		 - manage.py runserver
 Linux:
 		 - python3 manage.py runserver
-4) Для тестового просмотра можно скачать готовую БД
+4) Для тестового просмотра можно скачать готовую БД 
+https://drive.google.com/file/d/1iBwzWdnFNuTiu_imnqByCEqJcUHewXiY/view?usp=sharing
 		 

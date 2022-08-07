@@ -38,7 +38,7 @@ nav {
 	width: 100%
 }
 
-nav > ul{
+#conteiner > nav > ul {
 	display: inline-block;
 	width: 40vmax;
   margin-left: 15vmax;
@@ -80,7 +80,7 @@ aside {
     width: 75%;
     margin-left: 20%;
     text-align: center;
-    min-height: 400px;
+    min-height: 25vmax;
 }
 
 .aside-menu li {
