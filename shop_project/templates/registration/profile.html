@@ -12,7 +12,6 @@
             {{ user_form.errors.email }}
         </div>
         <div class='birth'>
-            {#<label for="{{ user_form.date_of_birth.id_for_label }}">Date of birth: </label>#}
             {{user_form.date_of_birth.label_tag}}
 			<p><input id="{{ user_form.date_of_birth.id_for_label }}" type="text" name="date_of_birth" placeholder="{{ user.date_of_birth|date:'d.m.Y' }}"></p>
             {{ user_form.errors.date_of_birth }}

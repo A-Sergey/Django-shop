@@ -21,7 +21,7 @@ class RegisterForm(UserCreationForm):
 
 class ProfileForm(forms.Form):
     email = forms.EmailField(label=_('Email'), required=False)
-    date_of_birth = forms.DateField(label=_('Date of birth'), required=False,)
+    date_of_birth = forms.DateField(label=('День рождения'), required=False,)
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:

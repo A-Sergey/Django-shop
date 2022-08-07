@@ -10,7 +10,7 @@ urlpatterns = [
     re_path(r'^$', PostListView.as_view(), name='news'),
     re_path(r'^accounts/', include('accounts.urls')),
     re_path('^products/', include('products.urls')),
-    re_path('^basket/', include('basket.urls')),
+    re_path('^cart/', include('cart.urls')),
     re_path('^about_us/', about_us)]
 
 if settings.DEBUG:

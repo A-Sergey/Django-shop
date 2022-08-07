@@ -18,7 +18,6 @@
   <input type="hidden" name="next" value="{% url 'login' %}?next={{request.path}}" />
   </form>
 
-  {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'password_reset' %}">Восстановить пароль</a></p>
   <p><a href="{% url 'register' %}">Регистрация</a></p>
 {% else %}

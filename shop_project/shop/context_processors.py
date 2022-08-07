@@ -1,5 +1,5 @@
 from products.models import Product
-from basket.basket import Basket
+from cart.cart import Cart
 from django.contrib.auth.forms import AuthenticationForm
 from products.forms import FindProduct
 from django.db.models import Q
@@ -17,9 +17,9 @@ def page_objects(request):
             product_of_the_day = None
     products_sale = Product.objects.filter(
                     ~Q(sell = "")&Q(product_of_the_day=False))
-    basket = Basket(request)
+    cart = Cart(request)
     total = 0
-    for product in basket:
+    for product in cart:
             total += product['total_price']
 
     return {'product_of_the_day': product_of_the_day,

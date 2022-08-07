@@ -6,7 +6,6 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
   <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-
 </head>
 <body>
     <div id="conteiner">
@@ -19,7 +18,7 @@
                         {% include 'temp_login.html' %}
                     {% endif %}
                     {% if user.is_authenticated %}
-                        <p><a href="/basket/">Корзина {{total}} руб</a></p>
+                        <p><a href="/cart/">Корзина {{total}} руб</a></p>
                     {% endif %}
                 </div>
             </header>
@@ -85,4 +84,3 @@
     </div>
 </body>
 </html>
-

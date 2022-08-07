@@ -20,12 +20,12 @@
 
         <p class="description">{{ product.description }}</p>
         </div>
-		<div class="basket">
+		<div class="cart">
 			<span>
-				<form action="{% url "basket_add" product.name %}" method="post">
+				<form action="{% url "cart_add" product.name %}" method="post">
 					{% csrf_token %}
-					{{basket_form.quantity}}
-					{{basket_form.update}}
+					{{cart_form.quantity}}
+					{{cart_form.update}}
 					<input type="submit" value="Добавить">
 				</form>
 			</span>
@@ -34,7 +34,7 @@
     <div class="comments">
         {% with comments as total_comments %}
             <h2>
-                Total of {{ total_comments.paginator.count }} comment{{ total_comments|pluralize }}
+                Всего {{ total_comments.paginator.count }} комментариев.
             </h2>
         {% endwith %}
         {% for comment in comments %}
@@ -45,10 +45,12 @@
                             <p>Comment {{ value }} by {{comment.author}} </p>
                         {% endif %}
                     {% endfor %}
-                    <a href="{{request.path}}?editable_comment_id={{comment.id}}">Редактировать</a>
+                    {% if request.user == comment.author %}
+                        <a href="{{request.path}}?editable_comment_id={{comment.id}}">Редактировать</a>
+                    {% endif %}
                 </div>
+                <div id="{{comment.id}}" class="comment">
                 {% if editable_comment_id == comment.id %}
-                    <div class="comment">
                     <form action="" method="post">
                       {% csrf_token %}
                       <textarea name="edit_comment">{{comment.body}}</textarea></br>
@@ -56,7 +58,6 @@
                     </form>
                     </div>
                 {% else %}
-                    <div class="comment">
                         <div class="date">
                             <span>{{comment.created}}</span>
                             {% if comment.created != comment.updated %}
@@ -71,7 +72,7 @@
                 {% endif %}
             {% endif %}
             {% empty %}
-            <div class="comment"><p>No comments.</p></div>
+            <div class="comment"><p>Нет комментариев</p></div>
         {% endfor %}
     <div class="pagination-comments">
     {% include "pagination.html" with page=comments %}
@@ -80,14 +81,13 @@
 
     <div class="add-comment">
         {% if user.is_authenticated %}
-            <h2>Add a new comment</h2>
+            <h2>Написать новый комментарий</h2>
             <form action="." method="post">
                 {{comment_form.body}}
                 {% csrf_token %}
-                <p><input type="submit" value="Add comment"></p>
+                <p><input type="submit" value="Отправить"></p>
             </form>
         {% endif %}
     </div>
 </div>
 {% endblock %}
-

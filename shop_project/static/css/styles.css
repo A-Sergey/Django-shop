@@ -4,7 +4,7 @@
 }
 .myshop > a {
     display: inline;
-    margin-left: 22vmax;
+    margin-left: 18vmax;
     font: 6vmax Brush Script MT;
     letter-spacing: 15px;
     color: #50a1b9;
@@ -12,12 +12,12 @@
 
 .myshop {
     display: inline-block;
-    width: 57vmax;
+    width: 52vmax;
 }
 
 .profile-info {
     display: inline-block;
-    width: 20vmax;
+    width: 17vmax;
 }
 
 .log_top {
@@ -40,13 +40,13 @@ nav {
 
 nav > ul{
 	display: inline-block;
-	width: 60%;
-    margin-left: 21%;
+	width: 40vmax;
+  margin-left: 15vmax;
 }
 
 nav > form{
 	display: inline-block;
-    width: 16%;
+	width: 12vmax;
 }
 
 .top-menu li {
@@ -225,7 +225,7 @@ aside > p {
     margin: 0;
 }
 
-.basket {
+.cart {
     position: relative;
     bottom: 100px;
 }

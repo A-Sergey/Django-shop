@@ -1,25 +1,23 @@
 from django.shortcuts import render,get_object_or_404
 from django.contrib import auth
 from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from basket.basket import Basket
-from basket.forms import BasketAddProductForm
+from cart.cart import Cart
+from cart.forms import CartAddProductForm
 from .forms import CommentForm, FindProduct
 from .models import Product
 
 def products(request):
-    basket = Basket(request)
+    cart = Cart(request)
     list_products = Product.objects.filter(visible_in_shop=True)
     if request.method == 'POST':
-        basket_form = BasketAddProductForm(request.POST)
-        if basket_form.is_valid():
+        cart_form = CartAddProductForm(request.POST)
+        if cart_form.is_valid():
             return redirect(request.META['HTTP_REFERER'])
     else:
-        basket_form = BasketAddProductForm(initial={'quantity':0})
+        cart_form = CartAddProductForm(initial={'quantity':0})
     for product in list_products:
         product.id = str(product.id)
     paginator = Paginator(list_products,6)
@@ -30,15 +28,15 @@ def products(request):
         list_products= paginator.page(1)
     except EmptyPage:
         list_products = paginator.page(paginator.num_pages)
-    context = {'list_products':list_products,'basket':basket,
-               'basket_form':basket_form,}
+    context = {'list_products':list_products,'cart':cart,
+               'cart_form':cart_form,}
     return render(request,'products.html',context)
 
 def product(request, name):
     product = get_object_or_404(Product, name=name, )
     comments = product.comments.filter(active=True)
     comments = comments.order_by('-created')
-    basket = Basket(request)
+    cart = Cart(request)
     dict_count = {}
     count = len(comments)+1
     try:
@@ -50,29 +48,29 @@ def product(request, name):
         dict_count.update({comment.id:count})
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
-        basket_form = BasketAddProductForm(request.POST)
+        cart_form = CartAddProductForm(request.POST)
         if editable_comment_id:
             comment = product.comments.get(id=editable_comment_id)
             edit_comment = request.POST.get('edit_comment')
             if (request.user == comment.author) and (comment.product == product):
                 comment.body = edit_comment
                 comment.save()
-                return HttpResponseRedirect(reverse("product",args=[name]))
+                return redirect(
+                    f"/products/{product.name}/want#{editable_comment_id}")
 
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.product = product
             new_comment.author = auth.get_user(request)
             new_comment.save()
-        if basket_form.is_valid():
-            return HttpResponseRedirect(reverse("product",args=[name]))
+        return redirect(f"/products/{product.name}/")
     else:
         comment_form = CommentForm()
         try:
-            quantity = basket.basket[str(product.id)]['quantity']
-            basket_form = BasketAddProductForm(initial={'quantity':quantity})
+            quantity = cart.cart[str(product.id)]['quantity']
+            cart_form = CartAddProductForm(initial={'quantity':quantity})
         except KeyError:
-            basket_form = BasketAddProductForm(initial={'quantity':0})
+            cart_form = CartAddProductForm(initial={'quantity':0})
     paginator = Paginator(comments,5,orphans=1)
     page = request.GET.get('page')
     try:
@@ -81,14 +79,13 @@ def product(request, name):
         comments= paginator.page(1)
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
-
     return render(
         request, 'product.html', {'product': product,
                                 'comments':comments,
-                                'basket':basket,
+                                'cart':cart,
                                 'dict_count':dict_count,
                                 'comment_form':comment_form,
-                                'basket_form':basket_form,
+                                'cart_form':cart_form,
                                 'editable_comment_id':editable_comment_id
                                 }
                 )

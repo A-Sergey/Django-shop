@@ -1,9 +1,9 @@
 from django.test import TestCase
-from basket.basket import Basket
+from cart.cart import Cart
 from products.models import Product
 
-class BasketTest(TestCase):
-        basket = Basket()
+class CartTest(TestCase):
+        cart = Cart()
         product_without_sell = Product(name='TestProduct', price='99',
                                         description='TestDescription')
         product_with_sell = Product(name='TestProduct', price='99', sell='55',

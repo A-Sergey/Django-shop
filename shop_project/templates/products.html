@@ -17,18 +17,18 @@
             <p style="margin-bottom: 4%; margin-top: 6%;">{{ product.price }} руб</p>
         {% endif %}
 		<a href="/products/{{ product.name }}/"><img src="{{ product.image.url}}"/></a>
-		<form action="{% url 'basket_add' product.name %}" method="post">
+		<form action="{% url 'cart_add' product.name %}" method="post">
             {% csrf_token %}
-            {% if product.id in basket.basket.keys %}
-                <label for="{{ basket_form.quantity.id_for_label }}">Count: </label>
+            {% if product.id in cart.cart.keys %}
+                <label for="{{ cart_form.quantity.id_for_label }}">Count: </label>
             {% endif %}
-            {% for key, value in basket.basket.items %}
+            {% for key, value in cart.cart.items %}
                 {% if product.id == key %}
-                    <input id="{{ basket_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{value.quantity}}" style="width: 40px;">
+                    <input id="{{ cart_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{value.quantity}}" style="width: 40px;">
                 {% endif %}
             {% endfor %}
-			{{basket_form.update}}
-			<input class="add-basket" type="submit" value="Добавить">
+			{{cart_form.update}}
+			<input class="add-cart" type="submit" value="Добавить">
 		</form>
     <p>Max: {{product.quantity}}</p>
         </div>
@@ -38,7 +38,7 @@
     {% include "pagination.html" with page=list_products %}
     </div>
 {% else %}
-    <p>No product are available.</p>
+    <p>Продукты отсутствуют.</p>
 {% endif %}
 {% endblock %}
 

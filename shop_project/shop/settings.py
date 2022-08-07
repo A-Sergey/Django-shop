@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'accounts',
-    'basket',
+    'cart',
     'news',
 
 ]
@@ -146,7 +146,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
-BASKET_SESSION_ID = 'basket'
+CART_SESSION_ID = 'cart'
 DATETIME_FORMAT="j N Y G:i T"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_PORT = '1025'

@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+{% block title %}Cart{% endblock title %}
+
+{% block body %}
+<div class = "cart-page">
+	{% for product in cart%}
+		<div class="cart-product">
+			<img src="{{ product.product.image.url }}" style="width: 15%;"/>
+			<p>Price: {{product.price}}</p>
+				<form action="{% url 'cart_add' product.product.name %}" method="post">
+					{% csrf_token %}
+					<label for="{{ cart_form.quantity.id_for_label }}">Count: </label>
+                    <input id="{{ cart_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{product.quantity}}">
+					{{cart_form.update}}
+					<input type="submit" value="Add to cart">
+				</form>
+			<p>Total price:{{product.total_price}}</p>
+            <span>
+				<form action="{% url 'cart_remove' product.product.name %}">
+					<input type="submit" value="x">
+				</form>
+			</span>
+		</div>
+	{% endfor %}
+	{% if total %}
+		<p>Total: {{total}}</p>
+	{% else %}
+		<p>The cart is empty.</p>
+	{% endif %}
+</div>
+{% endblock %}

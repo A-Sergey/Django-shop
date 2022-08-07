@@ -1,53 +1,52 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from products.models import Product
-from .basket import Basket
-from .forms import BasketAddProductForm
+from .cart import Cart
+from .forms import CartAddProductForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 @require_POST
-def basket_add(request, name):
-    basket = Basket(request)
+def cart_add(request, name):
+    cart = Cart(request)
     product = get_object_or_404(Product, name=name)
-    form = BasketAddProductForm(request.POST)
+    form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         if cd['quantity'] == 0:
-            basket_remove(request,name)
+            cart_remove(request,name)
             return redirect(request.META['HTTP_REFERER'])
         if product.quantity >= cd['quantity']:
-            print(product.quantity)
-            basket.add(product=product,
+            cart.add(product=product,
                        quantity=cd['quantity'],
                        update_quantity=cd['update'])
         else:
-            basket.add(product=product,
+            cart.add(product=product,
                        quantity=product.quantity,
                        update_quantity=cd['update'])
     else:
-        basket.add(product=product,
+        cart.add(product=product,
                    quantity=1,
                    update_quantity=False)
     return redirect(request.META['HTTP_REFERER'])
 
-def basket_clear(request, name):
-    basket = Basket(request)
-    basket.clear()
+def cart_clear(request, name):
+    cart = Cart(request)
+    cart.clear()
     return HttpResponseRedirect(reverse("product",args=[name]))
 
-def basket_remove(request,name):
-    basket = Basket(request)
+def cart_remove(request,name):
+    cart = Cart(request)
     product = get_object_or_404(Product, name=name)
-    basket.remove(product)
+    cart.remove(product)
     return redirect(request.META['HTTP_REFERER'])
 
-def basket_detail(request):
-    basket = Basket(request)
+def cart_detail(request):
+    cart = Cart(request)
     if request.method == 'POST':
-        basket_form = BasketAddProductForm(request.POST)
+        cart_form = CartAddProductForm(request.POST)
     else:
-        basket_form = BasketAddProductForm()
-    return render(request, 'basket.html', {'basket':basket,
-                                           'basket_form':basket_form,
+        cart_form = CartAddProductForm()
+    return render(request, 'cart.html', {'cart':cart,
+                                           'cart_form':cart_form,
                                            })
