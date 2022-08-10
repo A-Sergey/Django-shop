@@ -17,7 +17,8 @@
 
 .profile-info {
     display: inline-block;
-    width: 17vmax;
+    width: 15vmax;
+    float: right;
 }
 
 .log_top {
@@ -41,12 +42,13 @@ nav {
 #conteiner > nav > ul {
 	display: inline-block;
 	width: 40vmax;
-  margin-left: 15vmax;
+    margin-left: 15vmax;
 }
 
 nav > form{
 	display: inline-block;
-	width: 12vmax;
+	width: 15vmax;
+    float: right;
 }
 
 .top-menu li {
@@ -80,7 +82,7 @@ aside {
     width: 75%;
     margin-left: 20%;
     text-align: center;
-    min-height: 25vmax;
+    min-height: 30vmax;
 }
 
 .aside-menu li {

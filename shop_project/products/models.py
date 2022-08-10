@@ -17,6 +17,9 @@ class Product(models.Model):
     product_of_the_day = models.BooleanField(default=False)
     visible_in_shop = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ('id',)
+
     def get_price(self):
         if self.sell:
             return self.sell
