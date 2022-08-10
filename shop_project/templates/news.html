@@ -6,7 +6,7 @@
         {% for post in posts %}
             <p class="publish">Опубликовано: {{post.publish}}</p>
             <div class="post">
-            <p>{{post.body|linebreaks}}</p>
+            <p>{{post.body|linebreaksbr}}</p>
             </div>
         {%endfor%}
         <div class="pagination-posts">

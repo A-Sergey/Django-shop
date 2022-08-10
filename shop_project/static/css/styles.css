@@ -4,15 +4,16 @@
 }
 .myshop > a {
     display: inline;
-    margin-left: 18vmax;
-    font: 6vmax Brush Script MT;
+    font: 7vmax Brush Script MT;
     letter-spacing: 15px;
     color: #50a1b9;
 }
 
 .myshop {
     display: inline-block;
-    width: 52vmax;
+    width: 49vmax;
+    text-align: center;
+    margin-left: 15vmax;
 }
 
 .profile-info {
@@ -149,10 +150,12 @@ aside > p {
 
 .post {
     background: #E0FFFF;
+    padding: 4vmin;
 }
 
 .post > p {
     margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .products {

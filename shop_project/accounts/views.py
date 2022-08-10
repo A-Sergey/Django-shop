@@ -12,6 +12,11 @@ class RegisterView(generic.CreateView):
     form_class = RegisterForm
     template_name = "registration/register.html"
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("/")
+        return super().get(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("news")
 
@@ -22,6 +27,8 @@ class RegisterView(generic.CreateView):
 
 
 def profile(request):
+    if ~request.user.is_authenticated:
+        return redirect("/")
     user = CustomUser.objects.get(username=auth.get_user(request))
     if request.method == "POST":
         user_form = ProfileForm(request.POST)
