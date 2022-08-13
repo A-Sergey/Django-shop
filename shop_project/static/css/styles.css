@@ -245,7 +245,6 @@ p.description{
     border-style: inset;
     border-color: #cacd58;
     width: 36%;
-    border-radius: 51%;
     text-align: center;
 }
 
@@ -286,6 +285,10 @@ p.description{
     margin-top: 5%;
 }
 
+.reg table tbody tr td {
+    width: 25vmax;
+}
+
 .restore_password {
     margin-top:5%;
 }
@@ -304,7 +307,11 @@ form.log {
     margin-top: 5%;
     text-align: left;
     margin-inline: auto;
-    width: 27vmax;
+    width: 18vmax;
+}
+
+form.log p > input {
+    float: right;
 }
 
 .log input:nth-child(3) {

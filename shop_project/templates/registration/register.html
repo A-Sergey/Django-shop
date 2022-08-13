@@ -3,21 +3,24 @@
 {% block body %}
 <div class="page">
 <form class="reg" method="post">
-    <h1>Sign up</h1>
+    <h1>Регистрация</h1>
     {% csrf_token %}
 	<table>
 	<tr>
 		<td><label for="{{ reg.username.id_for_label }}">Имя пользователя: </label></td>
 		<td>{{reg.username}}</td>
 	</tr>
+	<tr><td>{{reg.username.errors}}</td></tr>
 	<tr>
 		<td><label for="{{ reg.email.id_for_label }}">E-mail: </label></td>
 		<td>{{reg.email}}</td>
 	</tr>
+	<tr><td>{{reg.email.errors}}</td></tr>
 	<tr>
 		<td><label for="{{ reg.date_of_birth.id_for_label }}">Дата рождения: </label></td>
 		<td>{{reg.date_of_birth}}</td>
 	</tr>
+	<tr><td>{{reg.date_of_birth.errors}}</td></tr>
 	<tr>
 		<td><label for="{{ reg.password1.id_for_label }}">Пароль: </label></td>
 		<td>{{reg.password1}}</td>
@@ -26,6 +29,7 @@
 		<td><label for="{{ reg.password2.id_for_label }}">Пароль(повторно): </label></td>
 		<td>{{reg.password2}}</td>
 	</tr>
+	<tr><td>{{reg.password2.errors}}</td></tr>
 	</table>
   <button type="submit">Регистрация</button>
 </form>

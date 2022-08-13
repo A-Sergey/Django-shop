@@ -6,7 +6,12 @@ from .models import CustomUser
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(label="Email")
-    date_of_birth = forms.DateField(label="Date of birth")
+    date_of_birth = forms.DateField(
+        label="Date of birth",
+        error_messages = {
+            "invalid": "Не верно введена дата (дд-мм-гггг)",
+        }
+    )
 
     class Meta:
         model = CustomUser
@@ -20,6 +25,20 @@ class RegisterForm(UserCreationForm):
             user.save()
         return user
 
+    def clean_username(self):
+        super(RegisterForm, self).clean()
+        username = self.cleaned_data["username"]
+        if CustomUser.objects.filter(username = username).exists():
+            raise forms.ValidationError("Имя пользователя занято")
+        return username
+
+    def clean_email(self):
+        super(RegisterForm, self).clean()
+        email = self.cleaned_data["email"]
+        if CustomUser.objects.filter(email = email).exists():
+            raise forms.ValidationError(
+                "Адрес электронной почты уже существует")
+        return email
 
 class ProfileForm(forms.Form):
     email = forms.EmailField(label=_("Email"), required=False)
