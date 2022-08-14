@@ -46,11 +46,19 @@
 	> python3 manage.py makemigrations products
 	
 	> python3 manage.py migrate
-4. Запуск сервера командой
+
+4. Создать файл *.env* в папке shop_project и заполнить:
+	> SECRET_KEY="здесь ввести сгенерированный ключ"
+
+	Для генерации ключа необходимо запустить интерпретатор python и ввести несколько строк.
+	> from django.core.management import utils
+	> utils.get_random_secret_key()
+
+5. Запуск сервера командой
 	#### *Windows:*
 	> manage.py runserver
 	#### *Linux:*
 	> python3 manage.py runserver
-5. Для тестового просмотра можно скачать готовую БД:
+6. Для тестового просмотра можно скачать готовую БД:
 	> [готовая БД](https://drive.google.com/file/d/11mCdYFi2Fth4Rr70mVeiZkvEHkusWq0Z/view?usp=sharing "Готовая БД")
 		 
