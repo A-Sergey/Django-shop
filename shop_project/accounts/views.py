@@ -27,7 +27,7 @@ class RegisterView(generic.CreateView):
 
 
 def profile(request):
-    if ~request.user.is_authenticated:
+    if not request.user.is_authenticated:
         return redirect("/")
     user = CustomUser.objects.get(username=auth.get_user(request))
     if request.method == "POST":

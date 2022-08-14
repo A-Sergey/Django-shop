@@ -9,7 +9,7 @@ class RegisterForm(UserCreationForm):
     date_of_birth = forms.DateField(
         label="Date of birth",
         error_messages = {
-            "invalid": "Не верно введена дата (дд-мм-гггг)",
+            "invalid": "Не верно введена дата (дд.мм.гггг)",
         }
     )
 

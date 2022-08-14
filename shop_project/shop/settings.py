@@ -115,6 +115,15 @@ LOGIN_REDIRECT_URL = "/"
 AUTH_USER_MODEL = "accounts.CustomUser"
 CART_SESSION_ID = "cart"
 DATETIME_FORMAT = "j N Y G:i T"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_PORT = "1025"
-EMAIL_HOST = "localhost"
+
+SERVER_EMAIL = os.environ.get("SERVER_EMAIL", "root@localhost")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "webmaster@localhost")
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
+EMAIL_PORT = os.environ.get("EMAIL_PORT", "1025")
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "localhost")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+EMAIL_USE_SSL = False
