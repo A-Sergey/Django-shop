@@ -15,7 +15,9 @@ class Product(models.Model):
         max_length=300,
     )
     quantity = models.IntegerField(default=0)
-    image = models.ImageField(upload_to="images/", default="images/111.jpg")
+    image = models.ImageField(
+        upload_to="images/", default="images/noImage.png"
+    )
     product_of_the_day = models.BooleanField(default=False)
     visible_in_shop = models.BooleanField(default=True)
 
