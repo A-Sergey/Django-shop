@@ -2,11 +2,11 @@
 {% block title %}Find{% endblock title %}
 
 {% block body %}
-    <div class="products-test">
+    <div class="products-find">
         {% if product_find %}
         {% for product in product_find %}
-            <div class="product-test">
-            <a href="/products/{{ product.name }}/">{{ product.name }}</a>
+            <div class="product-find">
+            <a href="/products/{{ product.slug }}/">{{ product.name }}</a>
             {% if product.sell %}
                 <p>
                     <s>{{ product.price }} руб</s>

@@ -28,7 +28,7 @@
 
 .log_top input:nth-child(3) {
     float: right;
-		margin-right: 1vmax;
+	margin-right: 1vmax;
 }
 
 .profile-info p > a {
@@ -321,4 +321,13 @@ form.log p > input {
 
 .login p > a {
     text-decoration: none;
+}
+
+.product-find {
+    margin-inline: 5vmax;
+    height: 15vmax;
+}
+.product-find img {
+    height: 119px;
+    float: left;
 }

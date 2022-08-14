@@ -16,7 +16,7 @@ class ProductAdmin(admin.ModelAdmin):
         "name",
         "price",
     )
-
+    prepopulated_fields = {"slug": ("name", )}
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = (

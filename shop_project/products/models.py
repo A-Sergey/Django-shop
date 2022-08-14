@@ -5,6 +5,8 @@ from accounts.models import CustomUser
 class Product(models.Model):
 
     name = models.CharField(max_length=20, unique=True)
+    name_lower = models.CharField(max_length=20, editable=False)
+    slug = models.SlugField(max_length=40, unique=True)
     price = models.CharField(
         max_length=10,
     )
@@ -30,6 +32,10 @@ class Product(models.Model):
 
     def __str__(self):
         return "=".join([self.name, self.price + " руб"])
+    
+    def save(self, *args, **kwargs):
+        self.name_lower = self.name.lower() if self.name else None
+        return super().save(*args, **kwargs)
 
 
 class Comment(models.Model):

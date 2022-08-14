@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import auth
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
 
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
@@ -37,10 +36,10 @@ def products(request):
     return render(request, "products.html", context)
 
 
-def product(request, name):
+def product(request, slug):
     product = get_object_or_404(
         Product,
-        name=name,
+        slug=slug,
     )
     comments = product.comments.filter(active=True)
     comments = comments.order_by("-created")
@@ -64,7 +63,7 @@ def product(request, name):
                 comment.body = edit_comment
                 comment.save()
                 return redirect(
-                    f"/products/{product.name}/want#{editable_comment_id}"
+                    f"/products/{product.slug}/want#{editable_comment_id}"
                 )
 
         if comment_form.is_valid():
@@ -72,7 +71,7 @@ def product(request, name):
             new_comment.product = product
             new_comment.author = auth.get_user(request)
             new_comment.save()
-        return redirect(f"/products/{product.name}/")
+        return redirect(f"/products/{product.slug}/")
     else:
         comment_form = CommentForm()
         try:
@@ -109,11 +108,11 @@ def find_product(request):
         if find_form.is_valid():
             cd = find_form.cleaned_data
             product_find = Product.objects.filter(
-                Q(visible_in_shop=True) & Q(name__startswith=cd["find_product"])
+                name_lower__icontains = cd["find_product"]
             )
             if product_find:
                 if len(product_find) == 1:
-                    return redirect(f"/products/{product_find[0].name}/")
+                    return redirect(f"/products/{product_find[0].slug}/")
     else:
         find_form = FindProduct()
         return redirect(request.META["HTTP_REFERER"])

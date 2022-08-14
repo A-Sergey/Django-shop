@@ -7,7 +7,7 @@
 		<div class="cart-product">
 			<img src="{{ product.product.image.url }}" style="width: 15%;"/>
 			<p>Price: {{product.price}}</p>
-				<form action="{% url 'cart_add' product.product.name %}" method="post">
+				<form action="{% url 'cart_add' product.product.slug %}" method="post">
 					{% csrf_token %}
 					<label for="{{ cart_form.quantity.id_for_label }}">Count: </label>
                     <input id="{{ cart_form.quantity.id_for_label }}" type="number" name="quantity" min="0" required="" value="{{product.quantity}}">
@@ -16,7 +16,7 @@
 				</form>
 			<p>Total price:{{product.total_price}}</p>
             <span>
-				<form action="{% url 'cart_remove' product.product.name %}">
+				<form action="{% url 'cart_remove' product.product.slug %}">
 					<input type="submit" value="x">
 				</form>
 			</span>
@@ -25,7 +25,7 @@
 	{% if total %}
 		<p>Total: {{total}}</p>
 	{% else %}
-		<p>The cart is empty.</p>
+		<p>Корзина пуста.</p>
 	{% endif %}
 </div>
 {% endblock %}

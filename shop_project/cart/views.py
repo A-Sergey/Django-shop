@@ -8,14 +8,14 @@ from django.urls import reverse
 
 
 @require_POST
-def cart_add(request, name):
+def cart_add(request, slug):
     cart = Cart(request)
-    product = get_object_or_404(Product, name=name)
+    product = get_object_or_404(Product, slug=slug)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         if cd["quantity"] == 0:
-            cart_remove(request, name)
+            cart_remove(request, slug)
             return redirect(request.META["HTTP_REFERER"])
         if product.quantity >= cd["quantity"]:
             cart.add(
@@ -32,15 +32,15 @@ def cart_add(request, name):
     return redirect(request.META["HTTP_REFERER"])
 
 
-def cart_clear(request, name):
+def cart_clear(request, slug):
     cart = Cart(request)
     cart.clear()
-    return HttpResponseRedirect(reverse("product", args=[name]))
+    return HttpResponseRedirect(reverse("product", args=[slug]))
 
 
-def cart_remove(request, name):
+def cart_remove(request, slug):
     cart = Cart(request)
-    product = get_object_or_404(Product, name=name)
+    product = get_object_or_404(Product, slug=slug)
     cart.remove(product)
     return redirect(request.META["HTTP_REFERER"])
 

@@ -7,7 +7,7 @@
     {% for product in list_products %}
         <div class="product">
 
-        <a href="/products/{{ product.name }}/">{{ product.name }}</a>
+        <a href="/products/{{ product.slug }}/">{{ product.name }}</a>
         {% if product.sell %}
             <p>
                 <s>{{ product.price }} руб</s>
@@ -16,8 +16,8 @@
         {% else %}
             <p style="margin-bottom: 4%; margin-top: 6%;">{{ product.price }} руб</p>
         {% endif %}
-		<a href="/products/{{ product.name }}/"><img src="{{ product.image.url}}"/></a>
-		<form action="{% url 'cart_add' product.name %}" method="post">
+		<a href="/products/{{ product.slug }}/"><img src="{{ product.image.url}}"/></a>
+		<form action="{% url 'cart_add' product.slug %}" method="post">
             {% csrf_token %}
             {% if product.id in cart.cart.keys %}
                 <label for="{{ cart_form.quantity.id_for_label }}">Count: </label>
